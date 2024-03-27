@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_t_store/utils/constants/colors.dart';
+import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
+import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
+
+class UtLoaders {
+  static hideSnackBar() =>
+      ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
+
+  static customToast({required message}) {
+    ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
+        elevation: 0,
+        duration: const Duration(seconds: 3),
+        backgroundColor: Colors.transparent,
+        content: Container(
+          padding: const EdgeInsets.all(12.0),
+          margin: const EdgeInsets.symmetric(horizontal: 30),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: UtHelperFunctions.isDarkMode(Get.context!)
+                  ? UtColors.darkerGrey.withOpacity(0.9)
+                  : UtColors.grey.withOpacity(0.9)),
+          child: Center(
+            child: Text(
+              message,
+              style: Theme.of(Get.context!).textTheme.labelLarge,
+            ),
+          ),
+        )));
+  }
+
+  static sucessSnackBar({required title, message = " ", duration = 3}) {
+    Get.snackbar(title, message,
+        isDismissible: true,
+        shouldIconPulse: true,
+        colorText: UtColors.white,
+        backgroundColor: UtColors.primary,
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: duration),
+        margin: const EdgeInsets.all(10),
+        icon: const Icon(
+          Iconsax.check,
+          color: UtColors.white,
+        ));
+  }
+
+  static warningSnackBar({required title, message = " ", duration = 3}) {
+    Get.snackbar(title, message,
+        isDismissible: true,
+        shouldIconPulse: true,
+        colorText: UtColors.white,
+        backgroundColor: Colors.orange,
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: duration),
+        margin: const EdgeInsets.all(20),
+        icon: const Icon(
+          Iconsax.warning_2,
+          color: UtColors.white,
+        ));
+  }
+
+  static errorSnackBar({required title, message = " ", duration = 3}) {
+    Get.snackbar(title, message,
+        isDismissible: true,
+        shouldIconPulse: true,
+        colorText: UtColors.white,
+        backgroundColor: Colors.red.shade600,
+        snackPosition: SnackPosition.BOTTOM,
+        duration: Duration(seconds: duration),
+        margin: const EdgeInsets.all(20),
+        icon: const Icon(
+          Iconsax.warning_2,
+          color: UtColors.white,
+        ));
+  }
+}
