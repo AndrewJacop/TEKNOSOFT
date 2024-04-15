@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_t_store/features/authentication/views/password/forgot_password_screen.dart';
 import 'package:flutter_t_store/features/authentication/views/signup/signup_screen.dart';
+import 'package:flutter_t_store/navigation_menu.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:flutter_t_store/utils/constants/text_strings.dart';
 import 'package:get/get.dart';
@@ -60,7 +61,9 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.maxFinite,
               child: ElevatedButton(
-                  onPressed: () {}, child: const Text(UtTexts.signIn)),
+                onPressed: () => Get.to(() => const NavigationMenu()),
+                child: const Text(UtTexts.signIn),
+              ),
             ),
             const SizedBox(height: UtSizes.spaceBtwItems),
 
@@ -68,8 +71,9 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.maxFinite,
               child: OutlinedButton(
-                  onPressed: () => Get.to(const SignupScreen()),
-                  child: const Text(UtTexts.createAccount)),
+                onPressed: () => Get.to(() => const SignupScreen()),
+                child: const Text(UtTexts.createAccount),
+              ),
             ),
             const SizedBox(height: UtSizes.spaceBtwSections),
           ],
