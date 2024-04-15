@@ -30,6 +30,7 @@ dependencies:
   # product-specific
   connectivity_plus: ^6.0.2
   firebase_storage: ^11.7.1
+  carousel_slider: ^4.2.1
 
 # ---------- DEV ONLY PACKAGES ---------- #
 
@@ -53,6 +54,8 @@ flutter:
     - assets/icons/categories/
     - assets/images/on_boarding_images/
     - assets/images/animations/
+    - assets/images/banners/
+    - assets/images/products/
 
   # ---------- FONTS ---------- #
   fonts:
