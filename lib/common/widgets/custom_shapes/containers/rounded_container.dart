@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 
-class RoundeddContainer extends StatelessWidget {
-  const RoundeddContainer({
+class RoundedContainer extends StatelessWidget {
+  const RoundedContainer({
     super.key,
     this.width,
     this.height,

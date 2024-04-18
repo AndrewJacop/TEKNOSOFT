@@ -34,7 +34,7 @@ class VerticalProductCard extends StatelessWidget {
         child: Column(
           children: [
             /// Thumbnail. wishlist, discount tag
-            RoundeddContainer(
+            RoundedContainer(
               height: 180,
               padding: const EdgeInsets.all(UtSizes.sm),
               backgroundColor: isDark ? UtColors.dark : UtColors.light,
@@ -49,7 +49,7 @@ class VerticalProductCard extends StatelessWidget {
                   /// Discount tag
                   Positioned(
                       top: 12,
-                      child: RoundeddContainer(
+                      child: RoundedContainer(
                         radius: UtSizes.sm,
                         backgroundColor: UtColors.secondary.withOpacity(0.8),
                         padding: const EdgeInsets.symmetric(
