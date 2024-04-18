@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_t_store/utils/constants/sizes.dart';
 
 class SectionHeading extends StatelessWidget {
   const SectionHeading({
@@ -18,24 +17,18 @@ class SectionHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: UtSizes.defaultSpace),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.headlineSmall,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-              if (showActionButton)
-                TextButton(onPressed: onPressed, child: Text(buttonTitle))
-            ],
-          )
-        ],
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: Theme.of(context).textTheme.headlineSmall,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+        if (showActionButton)
+          TextButton(onPressed: onPressed, child: Text(buttonTitle))
+      ],
     );
   }
 }

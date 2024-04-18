@@ -20,7 +20,7 @@ dependencies:
   smooth_page_indicator: ^1.1.0
 
   # Icons
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
   iconsax: ^0.0.8
 
   # State Managment
@@ -29,7 +29,7 @@ dependencies:
 
   # product-specific
   connectivity_plus: ^6.0.2
-  firebase_storage: ^11.7.1
+  firebase_storage: ^11.7.2
   carousel_slider: ^4.2.1
 
 # ---------- DEV ONLY PACKAGES ---------- #
@@ -38,7 +38,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.2
 
 # ---------- ./ PACKAGES END ---------- #
 
