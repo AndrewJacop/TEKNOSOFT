@@ -3,6 +3,7 @@ import 'package:flutter_t_store/common/styles/shadows.dart';
 import 'package:flutter_t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:flutter_t_store/common/widgets/icons/circular_icon.dart';
 import 'package:flutter_t_store/common/widgets/images/rounded_image.dart';
+import 'package:flutter_t_store/common/widgets/text/brand_title_text_with_varified_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/product_price_text.dart';
 import 'package:flutter_t_store/common/widgets/text/product_title_text.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
@@ -82,48 +83,37 @@ class VerticalProductCard extends StatelessWidget {
                   const ProductTitleText(
                       title: "Green Nike Air Shoes", smallSize: true),
                   const SizedBox(height: UtSizes.spaceBtwItems / 2),
-                  Row(
-                    children: [
-                      Text(
-                        "Nike",
-                        overflow: TextOverflow.ellipsis,
-                        style: Theme.of(context).textTheme.labelMedium,
-                        maxLines: 1,
-                      ),
-                      const SizedBox(width: UtSizes.xs),
-                      const Icon(
-                        Iconsax.verify5,
-                        color: UtColors.primary,
-                        size: UtSizes.iconXs,
-                      )
-                    ],
-                  ),
-
-                  /// const Spacer(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      /// Price
-                      const ProductPriceText(price: "35.5"),
-                      Container(
-                        decoration: const BoxDecoration(
-                            color: UtColors.dark,
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(UtSizes.cardRadiusMd),
-                              bottomRight:
-                                  Radius.circular(UtSizes.productImageRadius),
-                            )),
-                        child: const SizedBox(
-                            width: UtSizes.iconLg * 1.2,
-                            height: UtSizes.iconLg * 1.2,
-                            child: Center(
-                                child:
-                                    Icon(Iconsax.add, color: UtColors.white))),
-                      )
-                    ],
-                  )
+                  BrandTitleTextWithVerifiedIcon(title: 'Nike'),
                 ],
               ),
+            ),
+
+            const Spacer(),
+
+            /// const Spacer(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                /// Price
+                const Padding(
+                  padding: EdgeInsets.only(left: UtSizes.sm),
+                  child: ProductPriceText(price: "35.5"),
+                ),
+                Container(
+                  decoration: const BoxDecoration(
+                      color: UtColors.dark,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(UtSizes.cardRadiusMd),
+                        bottomRight:
+                            Radius.circular(UtSizes.productImageRadius),
+                      )),
+                  child: const SizedBox(
+                      width: UtSizes.iconLg * 1.2,
+                      height: UtSizes.iconLg * 1.2,
+                      child: Center(
+                          child: Icon(Iconsax.add, color: UtColors.white))),
+                )
+              ],
             )
           ],
         ),
@@ -131,5 +121,3 @@ class VerticalProductCard extends StatelessWidget {
     );
   }
 }
-
-

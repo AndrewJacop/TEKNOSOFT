@@ -16,16 +16,17 @@ class GridLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-        itemCount: itemCount,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.zero,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          mainAxisSpacing: UtSizes.gridViewSpacing,
-          crossAxisSpacing: UtSizes.gridViewSpacing,
-          mainAxisExtent: mainAxisExtent,
-        ),
-        itemBuilder: itemBuilder);
+      itemBuilder: itemBuilder,
+      itemCount: itemCount,
+      padding: EdgeInsets.zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: UtSizes.gridViewSpacing,
+        crossAxisSpacing: UtSizes.gridViewSpacing,
+        mainAxisExtent: mainAxisExtent,
+      ),
+    );
   }
 }
