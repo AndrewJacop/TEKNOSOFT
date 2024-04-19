@@ -16,29 +16,29 @@ class CategoryTab extends StatelessWidget {
         physics: const NeverScrollableScrollPhysics(),
         children: [
           Padding(
-            padding: EdgeInsets.all(UtSizes.defaultSpace),
+            padding: const EdgeInsets.all(UtSizes.defaultSpace),
             child: Column(
               children: [
                 /// -- Brands
-                BrandShowcase(images: [
+                const BrandShowcase(images: [
                   UtImages.productImage1,
                   UtImages.productImage2,
                   UtImages.productImage3,
                 ]),
-                BrandShowcase(images: [
+                const BrandShowcase(images: [
                   UtImages.productImage1,
                   UtImages.productImage2,
                   UtImages.productImage3,
                 ]),
-                SizedBox(height: UtSizes.spaceBtwItems),
+                const SizedBox(height: UtSizes.spaceBtwItems),
 
                 /// -- Products
                 SectionHeading(title: "You might like", onPressed: () {}),
-                SizedBox(height: UtSizes.spaceBtwItems),
+                const SizedBox(height: UtSizes.spaceBtwItems),
 
                 GridLayout(
                     itemCount: 4,
-                    itemBuilder: (_, index) => VerticalProductCard())
+                    itemBuilder: (_, index) => const VerticalProductCard())
               ],
             ),
           ),
