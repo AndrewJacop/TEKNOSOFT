@@ -48,7 +48,8 @@ class HomeScreen extends StatelessWidget {
                       HomeCategoriesCarousel(),
                     ],
                   ),
-                )
+                ),
+                SizedBox(height: UtSizes.spaceBtwSections),
               ],
             )),
 

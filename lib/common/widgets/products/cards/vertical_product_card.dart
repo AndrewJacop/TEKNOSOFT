@@ -6,16 +6,16 @@ import 'package:flutter_t_store/common/widgets/images/rounded_image.dart';
 import 'package:flutter_t_store/common/widgets/text/brand_title_text_with_varified_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/product_price_text.dart';
 import 'package:flutter_t_store/common/widgets/text/product_title_text.dart';
+import 'package:flutter_t_store/features/shop/views/product_details/product_details_screen.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/image_strings.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class VerticalProductCard extends StatelessWidget {
-  const VerticalProductCard({super.key, this.onPressed});
-
-  final void Function()? onPressed;
+  const VerticalProductCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class VerticalProductCard extends StatelessWidget {
 
     /// Container with side paddings, cotor, edges, radius ond shadow.
     return GestureDetector(
-      onTap: onPressed,
+      onTap: () => Get.to(() => const ProductDetailsScreen()),
       child: Container(
         width: 180,
         padding: const EdgeInsets.all(1),
