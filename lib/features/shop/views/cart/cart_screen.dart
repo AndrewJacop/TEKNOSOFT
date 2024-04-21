@@ -19,7 +19,7 @@ class CartScreen extends StatelessWidget {
         padding: EdgeInsets.all(UtSizes.defaultSpace),
 
         // ITEMS IN THE CART
-        child: CartsItem(),
+        child: CartItems(),
       ),
 
       // CHECKOUT BUTTON

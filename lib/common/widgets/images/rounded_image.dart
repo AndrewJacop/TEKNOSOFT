@@ -6,7 +6,7 @@ class RoundedImage extends StatelessWidget {
     super.key,
     this.width,
     this.height,
-    required this.imageUrI,
+    required this.imageUrl,
     this.applyImageRadius = true,
     this.border,
     this.backgroundColor,
@@ -18,7 +18,7 @@ class RoundedImage extends StatelessWidget {
   });
 
   final double? width, height;
-  final String imageUrI;
+  final String imageUrl;
   final bool applyImageRadius;
   final BoxBorder? border;
   final Color? backgroundColor;
@@ -49,11 +49,11 @@ class RoundedImage extends StatelessWidget {
                 : BorderRadius.zero,
             child: isNetworkImage
                 ? Image.network(
-                    imageUrI,
+                    imageUrl,
                     fit: fit,
                   )
                 : Image.asset(
-                    imageUrI,
+                    imageUrl,
                     fit: fit,
                   )),
       ),

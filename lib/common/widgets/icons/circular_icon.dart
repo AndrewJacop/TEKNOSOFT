@@ -35,18 +35,20 @@ class CircularIcon extends StatelessWidget {
       width: width,
       height: height,
       decoration: BoxDecoration(
-          color: backgroundColor ??
-              (isDark
+          borderRadius: BorderRadius.circular(100),
+          color: backgroundColor != null
+              ? backgroundColor!
+              : isDark
                   ? UtColors.black.withOpacity(0.9)
                   : UtColors.white.withOpacity(0.9)),
-          borderRadius: BorderRadius.circular(100)),
       child: IconButton(
-          onPressed: onPressed,
-          icon: Icon(
-            icon,
-            size: size,
-            color: color,
-          )),
+        onPressed: onPressed,
+        icon: Icon(
+          icon,
+          color: color,
+          size: size,
+        ),
+      ),
     );
   }
 }

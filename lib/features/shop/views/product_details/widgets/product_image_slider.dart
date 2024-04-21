@@ -47,7 +47,7 @@ class ProductImageSlider extends StatelessWidget {
                     const SizedBox(width: UtSizes.spaceBtwItems),
                 itemBuilder: (_, index) => RoundedImage(
                   width: 80,
-                  imageUrI: UtImages.productImage6,
+                  imageUrl: UtImages.productImage6,
                   backgroundColor: isDark ? UtColors.dark : UtColors.white,
                   border: Border.all(color: UtColors.primary),
                   padding: const EdgeInsets.all(UtSizes.sm),

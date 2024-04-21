@@ -25,7 +25,7 @@ class PromoSlider extends StatelessWidget {
               viewportFraction: 1,
               onPageChanged: (index, _) =>
                   controller.updatePageIndicator(index)),
-          items: banners.map((url) => RoundedImage(imageUrI: url)).toList(),
+          items: banners.map((url) => RoundedImage(imageUrl: url)).toList(),
         ),
         const SizedBox(height: UtSizes.spaceBtwItems),
         Center(

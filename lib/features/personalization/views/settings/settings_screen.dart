@@ -5,7 +5,9 @@ import 'package:flutter_t_store/features/personalization/views/address/address_s
 import 'package:flutter_t_store/features/personalization/views/profile/profile_screen.dart';
 import 'package:flutter_t_store/features/personalization/views/settings/widgets/settings_menu_tile.dart';
 import 'package:flutter_t_store/features/personalization/views/settings/widgets/user_profile_tile.dart';
+import 'package:flutter_t_store/features/shop/views/cart/cart_screen.dart';
 import 'package:flutter_t_store/features/shop/views/home/widgets/primary_header_container.dart';
+import 'package:flutter_t_store/features/shop/views/orders/orders_screen.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
@@ -63,12 +65,12 @@ class SettingsScreen extends StatelessWidget {
                       icon: Iconsax.shopping_cart,
                       title: "My Cart",
                       subTitle: "Add, remove products and move to checkout",
-                      onTap: () {}),
+                      onTap: () => Get.to(() => const CartScreen())),
                   SettingsMenuTile(
                       icon: Iconsax.bag_tick,
                       title: "My Orders",
                       subTitle: "In-progress and Completed Orders",
-                      onTap: () {}),
+                      onTap: () => Get.to(() => const OrdersScreen())),
                   SettingsMenuTile(
                       icon: Iconsax.bank,
                       title: "Bank Account",

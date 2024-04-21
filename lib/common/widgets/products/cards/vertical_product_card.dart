@@ -42,7 +42,7 @@ class VerticalProductCard extends StatelessWidget {
                 children: [
                   /// Thumbnail
                   const RoundedImage(
-                    imageUrI: UtImages.productImage1,
+                    imageUrl: UtImages.productImage1,
                     applyImageRadius: true,
                   ),
 

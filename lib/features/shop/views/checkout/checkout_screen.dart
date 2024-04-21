@@ -33,7 +33,7 @@ class CheckoutScreen extends StatelessWidget {
           child: Column(
             children: [
               // ITEMS IN THE CART
-              const CartsItem(showAddRemovebutton: false),
+              const CartItems(showAddRemovebutton: false),
               const SizedBox(height: UtSizes.spaceBtwSections),
 
               // COUPON TEXTFIELD

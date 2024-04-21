@@ -5,26 +5,25 @@ import 'package:flutter_t_store/common/widgets/text/product_title_text.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/image_strings.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
+import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({
     super.key,
-    required this.darkMode,
   });
-
-  final bool darkMode;
 
   @override
   Widget build(BuildContext context) {
+    final isDark = UtHelperFunctions.isDarkMode(context);
     return Row(
       children: [
         // IMAGE
         RoundedImage(
-          imageUrI: UtImages.productImage1,
+          imageUrl: UtImages.productImage1,
           width: 60,
           height: 60,
           padding: const EdgeInsets.all(UtSizes.sm),
-          backgroundColor: darkMode ? UtColors.darkerGrey : UtColors.light,
+          backgroundColor: isDark ? UtColors.darkerGrey : UtColors.light,
         ),
 
         const SizedBox(width: UtSizes.spaceBtwItems),

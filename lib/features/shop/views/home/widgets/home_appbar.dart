@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_t_store/common/widgets/appbar/custom_appbar.dart';
 import 'package:flutter_t_store/common/widgets/products/cart/cart_counter_icon.dart';
+import 'package:flutter_t_store/features/shop/views/cart/cart_screen.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/text_strings.dart';
+import 'package:get/get.dart';
 
 class HomeAppBar extends StatelessWidget {
   const HomeAppBar({
@@ -12,7 +14,11 @@ class HomeAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomAppBar(
-      actions: [CartCounterIcon(onPressed: () {}, iconColor: UtColors.white)],
+      actions: [
+        CartCounterIcon(
+            onPressed: () => Get.to(() => const CartScreen()),
+            iconColor: UtColors.white)
+      ],
       title: Column(
         children: [
           Text(UtTexts.homeAppbarTitle,
