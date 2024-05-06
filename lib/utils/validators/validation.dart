@@ -1,4 +1,12 @@
 class UtValidator {
+  static String? validateRequiredField(String? fieldName, String? value) {
+    if (value == null || value.isEmpty) {
+      return '$fieldName is required.';
+    }
+
+    return null;
+  }
+
   static String? validateEmail(String? value) {
     if (value == null || value.isEmpty) {
       return 'Email is required.';

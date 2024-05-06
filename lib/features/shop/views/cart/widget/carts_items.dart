@@ -22,7 +22,7 @@ class CartItems extends StatelessWidget {
       itemBuilder: (_, index) => Column(
         children: [
           // Cart Item
-          CartItem(),
+          const CartItem(),
 
           if (showAddRemovebutton)
             const SizedBox(height: UtSizes.spaceBtwItems),

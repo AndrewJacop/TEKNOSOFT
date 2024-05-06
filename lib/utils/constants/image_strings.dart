@@ -47,6 +47,8 @@ class UtImages {
   // -- Animations
   static const String productsIllustration =
       "assets/images/animations/sammy-line-workout.gif";
+  static const String docerAnimation =
+      "assets/images/animations/141594-animation-of-docer.json";
   static const String productsSaleIllustration =
       "assets/images/animations/sammy-line-sale.png";
   static const String staticSuccessIllustration =
@@ -57,6 +59,8 @@ class UtImages {
       "assets/images/animations/sammy-line-man-receives-a-mail.png";
   static const String verifyIllustration =
       "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
+  static const String successfulRegisterAnimation =
+      "assets/images/animations/Animation - 1706365790600.json";
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =

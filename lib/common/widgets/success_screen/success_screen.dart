@@ -3,6 +3,7 @@ import 'package:flutter_t_store/common/styles/spacing_styles.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:flutter_t_store/utils/constants/text_strings.dart';
 import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
+import 'package:lottie/lottie.dart';
 
 class SuccessScreen extends StatelessWidget {
   final String title, subTitle, image;
@@ -24,11 +25,11 @@ class SuccessScreen extends StatelessWidget {
           child: Column(
             children: [
               /// Image
-              Image.asset(
+              Lottie.asset(
                 image,
                 width: UtHelperFunctions.screenWidth() * 0.6,
               ),
-              const SizedBox(height: UtSizes.spaceBtwItems),
+              const SizedBox(height: UtSizes.spaceBtwSections),
 
               /// Title & Subtitle
               Text(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_t_store/features/authentication/views/signup/verify_email_screen.dart';
-import 'package:flutter_t_store/utils/constants/colors.dart';
+import 'package:flutter_t_store/features/authentication/controllers/signup/signup_controller.dart';
+import 'package:flutter_t_store/features/authentication/views/signup/widgets/terms_and_conditions_check_box.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:flutter_t_store/utils/constants/text_strings.dart';
-import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
+import 'package:flutter_t_store/utils/validators/validation.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -14,112 +14,108 @@ class SignupForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isDark = UtHelperFunctions.isDarkMode(context);
+    final controller = Get.put(SignupController());
     return Form(
+        key: controller.signupFormKey,
         child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
 
-      /// first & last name
-      children: [
-        Row(
+          /// first & last name
           children: [
-            Expanded(
-              child: TextFormField(
-                expands: false,
-                decoration: const InputDecoration(
-                    labelText: UtTexts.firstName,
-                    prefixIcon: Icon(Iconsax.user)),
-              ),
+            Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: controller.firstName,
+                    validator: (value) =>
+                        UtValidator.validateRequiredField("First name", value),
+                    expands: false,
+                    decoration: const InputDecoration(
+                        labelText: UtTexts.firstName,
+                        prefixIcon: Icon(Iconsax.user)),
+                  ),
+                ),
+                const SizedBox(width: UtSizes.spaceBtwInputFields),
+                Expanded(
+                  child: TextFormField(
+                    controller: controller.lastName,
+                    validator: (value) =>
+                        UtValidator.validateRequiredField("Last name", value),
+                    expands: false,
+                    decoration: const InputDecoration(
+                        labelText: UtTexts.lastName,
+                        prefixIcon: Icon(Iconsax.user)),
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(width: UtSizes.spaceBtwInputFields),
-            Expanded(
-              child: TextFormField(
-                expands: false,
-                decoration: const InputDecoration(
-                    labelText: UtTexts.lastName,
-                    prefixIcon: Icon(Iconsax.user)),
-              ),
+            const SizedBox(height: UtSizes.spaceBtwInputFields),
+
+            /// username
+            TextFormField(
+              controller: controller.userName,
+              validator: (value) =>
+                  UtValidator.validateRequiredField("User name", value),
+              expands: false,
+              decoration: const InputDecoration(
+                  labelText: UtTexts.username,
+                  prefixIcon: Icon(Iconsax.user_edit)),
             ),
-          ],
-        ),
-        const SizedBox(height: UtSizes.spaceBtwInputFields),
+            const SizedBox(height: UtSizes.spaceBtwInputFields),
 
-        /// username
-        TextFormField(
-          expands: false,
-          decoration: const InputDecoration(
-              labelText: UtTexts.username, prefixIcon: Icon(Iconsax.user_edit)),
-        ),
-        const SizedBox(height: UtSizes.spaceBtwInputFields),
+            /// email
+            TextFormField(
+              controller: controller.email,
+              validator: (value) => UtValidator.validateEmail(value),
+              expands: false,
+              decoration: const InputDecoration(
+                  labelText: UtTexts.email, prefixIcon: Icon(Iconsax.direct)),
+            ),
+            const SizedBox(height: UtSizes.spaceBtwInputFields),
 
-        /// email
-        TextFormField(
-          expands: false,
-          decoration: const InputDecoration(
-              labelText: UtTexts.email, prefixIcon: Icon(Iconsax.direct)),
-        ),
-        const SizedBox(height: UtSizes.spaceBtwInputFields),
+            /// phone number
+            TextFormField(
+              controller: controller.phoneNumber,
+              validator: (value) => UtValidator.validatePhoneNumber(value),
+              expands: false,
+              decoration: const InputDecoration(
+                  labelText: UtTexts.phoneNo, prefixIcon: Icon(Iconsax.call)),
+            ),
+            const SizedBox(height: UtSizes.spaceBtwInputFields),
 
-        /// phone number
-        TextFormField(
-          expands: false,
-          decoration: const InputDecoration(
-              labelText: UtTexts.phoneNo, prefixIcon: Icon(Iconsax.call)),
-        ),
-        const SizedBox(height: UtSizes.spaceBtwInputFields),
+            /// password
+            Obx(() => TextFormField(
+                  controller: controller.password,
+                  validator: (value) => UtValidator.validatePassword(value),
+                  expands: false,
+                  obscureText: controller.passwordHidden.value,
+                  decoration: InputDecoration(
+                      labelText: UtTexts.password,
+                      prefixIcon: const Icon(Iconsax.password_check),
+                      suffixIcon: IconButton(
+                        tooltip:
+                            controller.passwordHidden.value ? "Show" : "Hide",
+                        icon: Icon(controller.passwordHidden.value
+                            ? Iconsax.eye
+                            : Iconsax.eye_slash),
+                        onPressed: () => controller.passwordHidden.value =
+                            !controller.passwordHidden.value,
+                      )),
+                )),
+            const SizedBox(height: UtSizes.spaceBtwSections),
 
-        /// password
-        TextFormField(
-          expands: false,
-          decoration: const InputDecoration(
-              labelText: UtTexts.password,
-              prefixIcon: Icon(Iconsax.password_check),
-              suffixIcon: Icon(Iconsax.eye_slash)),
-        ),
-        const SizedBox(height: UtSizes.spaceBtwSections),
+            /// agree to terms
+            const TermsAndConditionsCheckBox(),
+            const SizedBox(height: UtSizes.spaceBtwSections),
 
-        /// agree to terms
-        Row(
-          children: [
+            /// create account button
             SizedBox(
-              child: Checkbox(
-                value: true,
-                onChanged: (value) {},
-              ),
+              width: double.maxFinite,
+              child: ElevatedButton(
+                  onPressed: () => {controller.signup()},
+                  child: const Text(UtTexts.createAccount)),
             ),
-            const SizedBox(width: UtSizes.spaceBtwItems),
-            Text.rich(TextSpan(children: [
-              TextSpan(
-                  text: UtTexts.iAgreeTo,
-                  style: Theme.of(context).textTheme.bodySmall),
-              TextSpan(
-                  text: " ${UtTexts.privacyPolicy}",
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: isDark ? UtColors.white : UtColors.primary,
-                        decoration: TextDecoration.underline,
-                      )),
-              TextSpan(
-                  text: UtTexts.and,
-                  style: Theme.of(context).textTheme.bodySmall),
-              TextSpan(
-                  text: " ${UtTexts.termsOfUse}",
-                  style: Theme.of(context).textTheme.bodyMedium!.apply(
-                        color: isDark ? UtColors.white : UtColors.primary,
-                        decoration: TextDecoration.underline,
-                      )),
-            ]))
           ],
-        ),
-        const SizedBox(height: UtSizes.spaceBtwSections),
-
-        /// create account button
-        SizedBox(
-          width: double.maxFinite,
-          child: ElevatedButton(
-              onPressed: () => {Get.to(() => const VerifyEmailScreen())},
-              child: const Text(UtTexts.createAccount)),
-        ),
-      ],
-    ));
+        ));
   }
 }
