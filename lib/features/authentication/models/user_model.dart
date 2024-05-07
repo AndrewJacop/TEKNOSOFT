@@ -7,7 +7,7 @@ class UserModel {
   final String id;
   String firstName;
   String lastName;
-  final String userName;
+  final String username;
   final String email;
   String phoneNumber;
   String profilePicture;
@@ -17,7 +17,7 @@ class UserModel {
     required this.id,
     required this.firstName,
     required this.lastName,
-    required this.userName,
+    required this.username,
     required this.email,
     required this.phoneNumber,
     required this.profilePicture,
@@ -38,8 +38,9 @@ class UserModel {
     String firstName = nameParts[0].toLowerCase();
     String lastName = nameParts.length > 1 ? nameParts[1].toLowerCase() : "";
 
-    String camelCaseUsername = "$firstName$lastName";
-    String userNameWithPrefix = "ecom_$camelCaseUsername";
+    String camelCaseUsername =
+        "$firstName$lastName"; // Combine first and last name
+    String userNameWithPrefix = "ecom_$camelCaseUsername"; // Add 'ecom_' prefix
 
     return userNameWithPrefix;
   }
@@ -49,7 +50,7 @@ class UserModel {
         id: '',
         firstName: '',
         lastName: '',
-        userName: '',
+        username: '',
         email: '',
         phoneNumber: '',
         profilePicture: '',
@@ -60,7 +61,7 @@ class UserModel {
     return {
       'FirstName': firstName,
       'LastName': lastName,
-      'Username': userName,
+      'Username': username,
       'Email': email,
       'PhoneNumber': phoneNumber,
       'ProfilePicture': profilePicture,
@@ -76,7 +77,7 @@ class UserModel {
         id: document.id,
         firstName: data!['FirstName'] ?? '',
         lastName: data['LastName'] ?? '',
-        userName: data['Username'] ?? '',
+        username: data['Username'] ?? '',
         email: data['Email'] ?? '',
         phoneNumber: data['PhoneNumber'] ?? '',
         profilePicture: data['ProfilePicture'] ?? '',

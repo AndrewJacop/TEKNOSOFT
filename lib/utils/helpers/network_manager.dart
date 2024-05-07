@@ -25,7 +25,7 @@ class NetworkManager extends GetxController {
   void _updateConnectionStatus(List<ConnectivityResult> result) async {
     _connectionStatus.value = result;
     if (_connectionStatus.contains(ConnectivityResult.none)) {
-      UtLoaders.warningSnackBar(title: 'No Internet Connection');
+      UtLoaders.customToast(message: 'No Internet Connection');
     }
   }
 
