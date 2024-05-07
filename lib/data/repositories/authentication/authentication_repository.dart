@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_t_store/features/authentication/views/login/login_screen.dart';
@@ -119,11 +120,26 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// [Email Authentication] - Forget Password
+  Future<void> sendPasswordResetEmail(String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+    } on FirebaseAuthException catch (e) {
+      throw UtFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UtFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const UtFormatException();
+    } on PlatformException catch (e) {
+      throw UtPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong.Please try again";
+    }
+  }
 
 /* -------------------------- Federated Identity & Social sign-in -------------------------- */
 
   /// [Google Authentication] - GOOGLE
-  Future<UserCredential> signInWithGoogle() async {
+  Future<UserCredential?> signInWithGoogle() async {
     try {
       // Trigger the authentication flow
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
@@ -147,7 +163,8 @@ class AuthenticationRepository extends GetxController {
     } on PlatformException catch (e) {
       throw UtPlatformException(e.code).message;
     } catch (e) {
-      throw "Something went wrong. Please try again";
+      if (kDebugMode) print("Something went wrong: $e");
+      return null;
     }
   }
 
