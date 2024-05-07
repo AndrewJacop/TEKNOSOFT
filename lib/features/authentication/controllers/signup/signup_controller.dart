@@ -27,7 +27,7 @@ class SignupController extends GetxController {
   final termsAgreed = false.obs;
 
   /// -- Sign Up
-  void signup() async {
+  Future<void> signup() async {
     try {
       // Start Loader
       UtFullScreenLoader.openLoadingDialog(

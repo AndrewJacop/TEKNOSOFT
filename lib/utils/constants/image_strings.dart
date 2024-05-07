@@ -60,7 +60,7 @@ class UtImages {
   static const String verifyIllustration =
       "assets/images/animations/sammy-line-travel-backpack-with-passport-and-air-ticket.gif";
   static const String successfulRegisterAnimation =
-      "assets/images/animations/Animation - 1706365790600.json";
+      "assets/images/animations/72462-check-register.json";
 
   // -- OnBoarding Texts
   static const String onBoardingImage1 =

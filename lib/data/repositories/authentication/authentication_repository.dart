@@ -28,13 +28,16 @@ class AuthenticationRepository extends GetxController {
     screenRedirect();
   }
 
-  /// Function to show Relevant Screen
+  /// Function to determine the relevent screen and redirect accordingly
   screenRedirect() async {
     final user = _auth.currentUser;
     if (user != null) {
+      // If user is logged in
       if (user.emailVerified) {
+        // if user's email is verified, navigate to the navigation screen
         Get.offAll(() => const NavigationMenu());
       } else {
+        // if user's email is not verified, navigate to the verifiy email screen
         Get.offAll(() => VerifyEmailScreen(email: _auth.currentUser?.email));
       }
     } else {
@@ -57,7 +60,24 @@ class AuthenticationRepository extends GetxController {
 /* -------------------------- Emain & Password sign-in -------------------------- */
 
   /// [Email Authentication] - Sign In
-  ///
+  Future<UserCredential> loginWithEmailAndPassword(
+      String email, String password) async {
+    try {
+      return await _auth.signInWithEmailAndPassword(
+          email: email, password: password);
+    } on FirebaseAuthException catch (e) {
+      throw UtFirebaseAuthException(e.code).message;
+    } on FirebaseException catch (e) {
+      throw UtFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const UtFormatException();
+    } on PlatformException catch (e) {
+      throw UtPlatformException(e.code).message;
+    } catch (e) {
+      throw "Something went wrong.Please try again";
+    }
+  }
+
   /// [Email Authentication] - Register Future<UserCredential>
   Future<UserCredential> registerWithEmailAndPassword(
       String email, String password) async {

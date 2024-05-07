@@ -54,8 +54,7 @@ class SignupForm extends StatelessWidget {
             /// username
             TextFormField(
               controller: controller.userName,
-              validator: (value) =>
-                  UtValidator.validateRequiredField("User name", value),
+              validator: (value) => UtValidator.validateUserName(value),
               expands: false,
               decoration: const InputDecoration(
                   labelText: UtTexts.username,
@@ -84,24 +83,26 @@ class SignupForm extends StatelessWidget {
             const SizedBox(height: UtSizes.spaceBtwInputFields),
 
             /// password
-            Obx(() => TextFormField(
-                  controller: controller.password,
-                  validator: (value) => UtValidator.validatePassword(value),
-                  expands: false,
-                  obscureText: controller.passwordHidden.value,
-                  decoration: InputDecoration(
-                      labelText: UtTexts.password,
-                      prefixIcon: const Icon(Iconsax.password_check),
-                      suffixIcon: IconButton(
-                        tooltip:
-                            controller.passwordHidden.value ? "Show" : "Hide",
-                        icon: Icon(controller.passwordHidden.value
-                            ? Iconsax.eye
-                            : Iconsax.eye_slash),
-                        onPressed: () => controller.passwordHidden.value =
-                            !controller.passwordHidden.value,
-                      )),
-                )),
+            Obx(
+              () => TextFormField(
+                controller: controller.password,
+                validator: (value) => UtValidator.validatePassword(value),
+                // expands: false,
+                obscureText: controller.passwordHidden.value,
+                decoration: InputDecoration(
+                    labelText: UtTexts.password,
+                    prefixIcon: const Icon(Iconsax.password_check),
+                    suffixIcon: IconButton(
+                      tooltip:
+                          controller.passwordHidden.value ? "Show" : "Hide",
+                      icon: Icon(controller.passwordHidden.value
+                          ? Iconsax.eye
+                          : Iconsax.eye_slash),
+                      onPressed: () => controller.passwordHidden.value =
+                          !controller.passwordHidden.value,
+                    )),
+              ),
+            ),
             const SizedBox(height: UtSizes.spaceBtwSections),
 
             /// agree to terms

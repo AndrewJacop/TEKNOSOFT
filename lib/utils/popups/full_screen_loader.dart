@@ -6,12 +6,12 @@ import 'package:get/get.dart';
 
 /// A utility class for managing o full-screen tooding diatog.
 class UtFullScreenLoader {
-// Open a full-screen loading dialog with a given text and animation.
-// This method doesn't return anything.
-//
-// Parameters:
-//  - text: The text to be displayed in the toading dialog.
-//  - animation: The Lottie animation to be Shown.
+  /// Open a full-screen loading dialog with a given text and animation.
+  /// This method doesn't return anything.
+  ///
+  /// Parameters:
+  ///  - text: The text to be displayed in the toading dialog.
+  ///  - animation: The Lottie animation to be Shown.
   static void openLoadingDialog(String text, String animation) {
     showDialog(
       context:
