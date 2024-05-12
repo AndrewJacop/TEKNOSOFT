@@ -11,12 +11,14 @@ import 'package:flutter_t_store/utils/helpers/network_manager.dart';
 import 'package:flutter_t_store/utils/popups/full_screen_loader.dart';
 import 'package:flutter_t_store/utils/popups/loaders.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserController extends GetxController {
   static UserController get instance => Get.find();
 
   /// Variables
   final profileLoading = false.obs;
+  final imageUploading = false.obs;
   Rx<UserModel> user = UserModel.empty().obs;
   final userRepository = Get.put(UserRepository());
 
@@ -47,26 +49,33 @@ class UserController extends GetxController {
   /// Save user Record from any Registeration provider
   Future<void> saveUserRecord(UserCredential? userCredential) async {
     try {
-      if (userCredential != null) {
-        // Convert Name to First and Last Name
-        final nameParts =
-            UserModel.nameparts(userCredential.user!.displayName ?? '');
-        final username =
-            UserModel.genrateUserName(userCredential.user!.displayName ?? '');
+      // First Update Rx User and then check if user data is already stored. If not store new data
+      await fetchUserRecord();
 
-        // Map data
-        final user = UserModel(
-          id: userCredential.user!.uid,
-          firstName: nameParts[0],
-          lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
-          username: username,
-          email: userCredential.user!.email ?? '',
-          phoneNumber: userCredential.user!.phoneNumber ?? '',
-          profilePicture: userCredential.user!.photoURL ?? '',
-        );
+      // If no record at readv stored.
+      if (user.value.id.isEmpty) {
+        if (userCredential != null) {
+          // Convert Name to First and Last Name
+          final nameParts =
+              UserModel.nameparts(userCredential.user!.displayName ?? '');
+          final username =
+              UserModel.genrateUserName(userCredential.user!.displayName ?? '');
 
-        // Save user data
-        await userRepository.saveUserRecord(user);
+          // Map data
+          final user = UserModel(
+            id: userCredential.user!.uid,
+            firstName: nameParts[0],
+            lastName:
+                nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+            username: username,
+            email: userCredential.user!.email ?? '',
+            phoneNumber: userCredential.user!.phoneNumber ?? '',
+            profilePicture: userCredential.user!.photoURL ?? '',
+          );
+
+          // Save user data
+          await userRepository.saveUserRecord(user);
+        }
       }
     } catch (e) {
       UtLoaders.warningSnackBar(
@@ -157,6 +166,42 @@ class UserController extends GetxController {
     } catch (e) {
       UtFullScreenLoader.stopLoading();
       UtLoaders.warningSnackBar(title: 'Oh Snap!', message: e.toString());
+    }
+  }
+
+  /// Upload user profile Image
+  Future<void> uploadUserProfilePicture() async {
+    try {
+      imageUploading.value = true;
+      final image = await ImagePicker().pickImage(
+        source: ImageSource.gallery,
+        maxHeight: 512,
+        maxWidth: 512,
+        imageQuality: 70,
+      );
+
+      if (image != null) {
+        // Upload image
+        final imageUrl =
+            await userRepository.uploadImage('Users/Images/Profile/', image);
+        // Update User Image Record in database
+        Map<String, dynamic> json = {'ProfilePicture': imageUrl};
+        await userRepository.updateSingleField(json);
+        // Update local user record
+        user.value.profilePicture = imageUrl;
+        user.refresh();
+
+        // Success Snack Bar
+        UtLoaders.sucessSnackBar(
+          title: 'Congratulations!',
+          message: 'Your Profile Picture has been Updated Successfully',
+        );
+      }
+    } catch (e) {
+      UtLoaders.errorSnackBar(
+          title: 'Oh Snap!', message: "Something went wrong: $e");
+    } finally {
+      imageUploading.value = false;
     }
   }
 }

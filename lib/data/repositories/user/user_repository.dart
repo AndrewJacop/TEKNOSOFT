@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_t_store/data/repositories/authentication/authentication_repository.dart';
 import 'package:flutter_t_store/features/authentication/models/user_model.dart';
@@ -8,6 +11,7 @@ import 'package:flutter_t_store/utils/exceptions/platform_exceptions.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:image_picker/image_picker.dart';
 
 class UserRepository extends GetxController {
   static UserRepository get instance => Get.find();
@@ -104,20 +108,20 @@ class UserRepository extends GetxController {
   }
 
   /// Upload Any Image
-  // Future<String> uploadImage(String path, XFile image) async {
-  //   try {
-  //     final ref = FirebaseStorage.instance.ref(path).child(image.name);
-  //     await ref.putFile(File(image.path));
-  //     final url = await ref.getDownloadURL();
-  //     return url;
-  //   } on FirebaseException catch (e) {
-  //     throw UtFirebaseException(e.code).message;
-  //   } on FormatException catch (_) {
-  //     throw const UtFormatException();
-  //   } on PlatformException catch (e) {
-  //     throw UtPlatformException(e.code).message;
-  //   } catch (e) {
-  //     throw 'Something went wrong. Please try again';
-  //   }
-  // }
+  Future<String> uploadImage(String path, XFile image) async {
+    try {
+      final ref = FirebaseStorage.instance.ref(path).child(image.name);
+      await ref.putFile(File(image.path));
+      final url = await ref.getDownloadURL();
+      return url;
+    } on FirebaseException catch (e) {
+      throw UtFirebaseException(e.code).message;
+    } on FormatException catch (_) {
+      throw const UtFormatException();
+    } on PlatformException catch (e) {
+      throw UtPlatformException(e.code).message;
+    } catch (e) {
+      throw 'Something went wrong. Please try again';
+    }
+  }
 }

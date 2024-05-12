@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_t_store/common/widgets/appbar/custom_appbar.dart';
 import 'package:flutter_t_store/common/widgets/images/circular_image.dart';
+import 'package:flutter_t_store/common/widgets/loaders/shimmer.dart';
 import 'package:flutter_t_store/common/widgets/text/section_heading.dart';
 import 'package:flutter_t_store/features/personalization/controllers/user_controller.dart';
 import 'package:flutter_t_store/features/personalization/views/profile/widgets/change_name_screen.dart';
@@ -33,10 +34,25 @@ class ProfileScreen extends StatelessWidget {
                 width: double.infinity,
                 child: Column(
                   children: [
-                    const CircularImage(
-                        image: UtImages.user, width: 80, height: 80),
+                    Obx(() {
+                      if (contoller.imageUploading.value) {
+                        return const ShimmerEffect(width: 80, height: 80);
+                      } else {
+                        final networkImage =
+                            contoller.user.value.profilePicture;
+                        final image = networkImage.isNotEmpty
+                            ? networkImage
+                            : UtImages.user;
+                        return CircularImage(
+                          isNetworkImage: networkImage.isNotEmpty,
+                          image: image,
+                          width: 80,
+                          height: 80,
+                        );
+                      }
+                    }),
                     TextButton(
-                        onPressed: () {},
+                        onPressed: () => contoller.uploadUserProfilePicture(),
                         child: const Text("Change Profile Pucture")),
                   ],
                 ),

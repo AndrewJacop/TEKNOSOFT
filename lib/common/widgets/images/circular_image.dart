@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_t_store/common/widgets/loaders/shimmer.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 
@@ -35,12 +37,24 @@ class CircularImage extends StatelessWidget {
           // If image background color is null then switch it to light and dark mode color design.
           color: backgroundColor ?? (isDark ? UtColors.black : UtColors.white),
           borderRadius: BorderRadius.circular(100)),
-      child: Image(
-        fit: fit,
-        color: overlayColor,
-        image: isNetworkImage
-            ? NetworkImage(image)
-            : AssetImage(image) as ImageProvider,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Center(
+          child: isNetworkImage
+              ? CachedNetworkImage(
+                  fit: fit,
+                  color: overlayColor,
+                  imageUrl: image,
+                  errorWidget: (context, url, error) => const Icon(Icons.error),
+                  progressIndicatorBuilder: (context, url, progress) =>
+                      ShimmerEffect(width: width, height: height),
+                )
+              : Image(
+                  fit: fit,
+                  color: overlayColor,
+                  image: AssetImage(image),
+                ),
+        ),
       ),
     );
   }
