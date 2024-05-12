@@ -19,15 +19,15 @@ class ShimmerEffect extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final darkMode = UtHelperFunctions.isDarkMode(context);
+    final isDark = UtHelperFunctions.isDarkMode(context);
     return Shimmer.fromColors(
-      baseColor: darkMode ? Colors.grey[850]! : Colors.grey[300]!,
-      highlightColor: darkMode ? Colors.grey[700]! : Colors.grey[100]!,
+      baseColor: isDark ? Colors.grey[850]! : Colors.grey[300]!,
+      highlightColor: isDark ? Colors.grey[700]! : Colors.grey[100]!,
       child: Container(
         width: width,
         height: height,
         decoration: BoxDecoration(
-          color: color ?? (darkMode ? UtColors.darkerGrey : UtColors.white),
+          color: color ?? (isDark ? UtColors.darkerGrey : UtColors.white),
           borderRadius: BorderRadius.circular(radius),
         ),
       ),

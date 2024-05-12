@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_t_store/common/widgets/appbar/custom_appbar.dart';
 import 'package:flutter_t_store/common/widgets/images/circular_image.dart';
 import 'package:flutter_t_store/common/widgets/text/section_heading.dart';
+import 'package:flutter_t_store/features/personalization/controllers/user_controller.dart';
+import 'package:flutter_t_store/features/personalization/views/profile/widgets/change_name_screen.dart';
 import 'package:flutter_t_store/features/personalization/views/profile/widgets/profile_menu_tile.dart';
 import 'package:flutter_t_store/utils/constants/image_strings.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
+import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -12,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final contoller = UserController.instance;
     return Scaffold(
       appBar: const CustomAppBar(
         title: Text("Profile"),
@@ -49,9 +53,13 @@ class ProfileScreen extends StatelessWidget {
               const SizedBox(height: UtSizes.spaceBtwItems),
 
               ProfileMenuTile(
-                  title: "Name", value: "Andrew Jacop", onPressed: () {}),
+                  title: "Name",
+                  value: contoller.user.value.fullName,
+                  onPressed: () => Get.to(const ChangeNameScreen())),
               ProfileMenuTile(
-                  title: "Username", value: "Andrew_Jacop", onPressed: () {}),
+                  title: "Username",
+                  value: contoller.user.value.username,
+                  onPressed: () {}),
 
               const SizedBox(height: UtSizes.spaceBtwItems),
               const Divider(),
@@ -64,16 +72,16 @@ class ProfileScreen extends StatelessWidget {
 
               ProfileMenuTile(
                   title: "User ID",
-                  value: "456789",
+                  value: contoller.user.value.id,
                   icon: Iconsax.copy,
                   onPressed: () {}),
               ProfileMenuTile(
                   title: "E-mail",
-                  value: "andrewjacop@gmail.com",
+                  value: contoller.user.value.email,
                   onPressed: () {}),
               ProfileMenuTile(
                   title: "Phone Number",
-                  value: "01234567890",
+                  value: contoller.user.value.phoneNumber,
                   onPressed: () {}),
               ProfileMenuTile(title: "Gender", value: "Male", onPressed: () {}),
               ProfileMenuTile(
@@ -86,7 +94,7 @@ class ProfileScreen extends StatelessWidget {
               Center(
                 child: TextButton(
                   child: const Text("Close Account"),
-                  onPressed: () {},
+                  onPressed: () => contoller.deleteAccountWarningPopup(),
                 ),
               )
             ],
