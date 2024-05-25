@@ -5,6 +5,7 @@ import 'package:flutter_t_store/common/widgets/brands/brand_card.dart';
 import 'package:flutter_t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:flutter_t_store/common/widgets/products/cart/cart_counter_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/section_heading.dart';
+import 'package:flutter_t_store/features/shop/controllers/category_controller.dart';
 import 'package:flutter_t_store/features/shop/views/brands/all_brands_screen.dart';
 import 'package:flutter_t_store/features/shop/views/home/widgets/search_container.dart';
 import 'package:flutter_t_store/features/shop/views/store/widgets/category_tab.dart';
@@ -20,15 +21,18 @@ class StoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = UtHelperFunctions.isDarkMode(context);
+    final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
-      length: 5,
+      length: categories.length,
       child: Scaffold(
+        /// -- Appbar
         appBar: CustomAppBar(
-          title:
-              Text("Store", style: Theme.of(context).textTheme.headlineMedium),
+          title: Text("Store", style: Theme.of(context).textTheme.headlineMedium),
           actions: [CartCounterIcon(onPressed: () {})],
         ),
         body: NestedScrollView(
+
+            /// -- Header
             headerSliverBuilder: (_, innerBoxIsScrollable) {
               return [
                 SliverAppBar(
@@ -37,6 +41,7 @@ class StoreScreen extends StatelessWidget {
                   floating: true,
                   backgroundColor: isDark ? UtColors.black : UtColors.white,
                   expandedHeight: 440,
+                  // Space between Appbar and Tapbar
                   flexibleSpace: Padding(
                     padding: const EdgeInsets.all(UtSizes.defaultSpace),
                     child: ListView(
@@ -55,9 +60,7 @@ class StoreScreen extends StatelessWidget {
 
                         /// -- Feature Brands
                         SectionHeading(
-                            title: 'Featured Brands',
-                            onPressed: () =>
-                                Get.to(() => const AllBrandsScreen())),
+                            title: 'Featured Brands', onPressed: () => Get.to(() => const AllBrandsScreen())),
                         const SizedBox(height: UtSizes.spaceBtwItems / 1.5),
 
                         // -- Brand GRID
@@ -72,26 +75,16 @@ class StoreScreen extends StatelessWidget {
                     ),
                   ),
                   // -- Taps
-                  bottom: const CustomTabBar(tabs: [
-                    Tab(child: Text("Sports")),
-                    Tab(child: Text("Furniture")),
-                    Tab(child: Text("Electronics")),
-                    Tab(child: Text("Clothes")),
-                    Tab(child: Text("Cosmetics")),
-                  ]),
+                  bottom: CustomTabBar(
+                    tabs: categories.map((category) => Tab(child: Text(category.name))).toList(),
+                  ),
                 ),
               ];
             },
 
             /// -- Body
-            body: const TabBarView(
-              children: [
-                CategoryTab(),
-                CategoryTab(),
-                CategoryTab(),
-                CategoryTab(),
-                CategoryTab(),
-              ],
+            body: TabBarView(
+              children: categories.map((category) => CategoryTab(category: category)).toList(),
             )),
       ),
     );

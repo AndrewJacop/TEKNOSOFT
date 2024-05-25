@@ -36,10 +36,7 @@ class UpdateNameController extends GetxController {
   Future<void> updateUsername() async {
     try {
       // Start loading
-      UtFullScreenLoader.openLoadingDialog(
-        'We are updating your Information',
-        UtImages.docerAnimation,
-      );
+      UtFullScreenLoader.openLoadingDialog('We are updating your Information', UtImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -55,10 +52,7 @@ class UpdateNameController extends GetxController {
       }
 
       // Update Users First & Last Name in the Firebase Firestore
-      Map<String, dynamic> name = {
-        'FirstName': firstName.text.trim(),
-        'LastName': lastName.text.trim()
-      };
+      Map<String, dynamic> name = {'FirstName': firstName.text.trim(), 'LastName': lastName.text.trim()};
       await userRepository.updateSingleField(name);
 
       // Update the Rx USer Value

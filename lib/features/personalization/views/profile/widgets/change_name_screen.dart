@@ -14,6 +14,7 @@ class ChangeNameScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(UpdateNameController());
     return Scaffold(
+      /// Custom Appbar
       appBar: CustomAppBar(
         showBackArrow: true,
         title: Text(
@@ -25,7 +26,7 @@ class ChangeNameScreen extends StatelessWidget {
         padding: const EdgeInsets.all(UtSizes.defaultSpace),
         child: Column(
           children: [
-            // Heading
+            /// Heading
             Text(
               'Use real name for verification. This name will appear on several pages',
               style: Theme.of(context).textTheme.labelMedium,
@@ -33,15 +34,14 @@ class ChangeNameScreen extends StatelessWidget {
 
             const SizedBox(height: UtSizes.spaceBtwSections),
 
-            // Form
+            /// Form
             Form(
               key: controller.updateUserNameFormKey,
               child: Column(
                 children: [
                   TextFormField(
                     controller: controller.firstName,
-                    validator: (value) =>
-                        UtValidator.validateRequiredField('First name', value),
+                    validator: (value) => UtValidator.validateRequiredField('First name', value),
                     expands: false,
                     decoration: const InputDecoration(
                       labelText: UtTexts.firstName,
@@ -51,8 +51,7 @@ class ChangeNameScreen extends StatelessWidget {
                   const SizedBox(height: UtSizes.spaceBtwInputFields),
                   TextFormField(
                     controller: controller.lastName,
-                    validator: (value) =>
-                        UtValidator.validateRequiredField('Last name', value),
+                    validator: (value) => UtValidator.validateRequiredField('Last name', value),
                     expands: false,
                     decoration: const InputDecoration(
                       labelText: UtTexts.lastName,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_t_store/common/widgets/images/circular_image.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
@@ -11,11 +12,13 @@ class VerticalImageTextCard extends StatelessWidget {
     this.textColor = UtColors.white,
     this.backgroundColor,
     this.onTap,
+    this.isNetworkImage = true,
   });
 
   final String image, title;
   final Color textColor;
   final Color? backgroundColor;
+  final bool isNetworkImage;
   final void Function()? onTap;
 
   @override
@@ -28,31 +31,20 @@ class VerticalImageTextCard extends StatelessWidget {
         child: Column(
           children: [
             /// Circular icon
-            Container(
-              width: 56,
-              height: 56,
-              padding: const EdgeInsets.all(UtSizes.sm),
-              decoration: BoxDecoration(
-                  color: backgroundColor ??
-                      (isDark ? UtColors.black : UtColors.white),
-                  borderRadius: BorderRadius.circular(100)),
-              child: Center(
-                child: Image.asset(
-                  image,
-                  fit: BoxFit.cover,
-                  color: (isDark ? UtColors.light : UtColors.dark),
-                ),
-              ),
+            CircularImage(
+              image: image,
+              fit: BoxFit.fitWidth,
+              padding: UtSizes.sm * 1.4,
+              isNetworkImage: isNetworkImage,
+              backgroundColor: backgroundColor,
+              overlayColor: (isDark ? UtColors.light : UtColors.dark),
             ),
             const SizedBox(height: UtSizes.spaceBtwItems / 2),
             SizedBox(
                 width: 55,
                 child: Text(
                   title,
-                  style: Theme.of(context)
-                      .textTheme
-                      .labelMedium!
-                      .apply(color: textColor),
+                  style: Theme.of(context).textTheme.labelMedium!.apply(color: textColor),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ))

@@ -17,28 +17,18 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = Get.put(UserController());
     return CustomAppBar(
-      actions: [
-        CartCounterIcon(
-            onPressed: () => Get.to(() => const CartScreen()),
-            iconColor: UtColors.white)
-      ],
+      actions: [CartCounterIcon(onPressed: () => Get.to(() => const CartScreen()), iconColor: UtColors.white)],
       title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(UtTexts.homeAppbarTitle,
-              style: Theme.of(context)
-                  .textTheme
-                  .labelMedium!
-                  .apply(color: UtColors.grey)),
+          Text(UtTexts.homeAppbarTitle, style: Theme.of(context).textTheme.labelMedium!.apply(color: UtColors.grey)),
           Obx(() {
             if (controller.profileLoading.value) {
               // Display a shimmer loader while user profile is loading
               return const ShimmerEffect(width: 80, height: 15);
             } else {
               return Text(controller.user.value.fullName,
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineSmall!
-                      .apply(color: UtColors.white));
+                  style: Theme.of(context).textTheme.headlineSmall!.apply(color: UtColors.white));
             }
           }),
         ],

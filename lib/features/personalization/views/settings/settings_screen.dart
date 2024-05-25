@@ -29,16 +29,12 @@ class SettingsScreen extends StatelessWidget {
                   /// AppBar
                   CustomAppBar(
                     title: Text("Account",
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium!
-                            .apply(color: UtColors.white)),
+                        style: Theme.of(context).textTheme.headlineMedium!.apply(color: UtColors.white)),
                   ),
                   const SizedBox(height: UtSizes.spaceBtwSections),
 
                   /// User Profile Card
-                  UserProfileTile(
-                      onPressed: () => Get.to(() => const ProfileScreen())),
+                  UserProfileTile(onPressed: () => Get.to(() => const ProfileScreen())),
                   const SizedBox(height: UtSizes.spaceBtwSections),
                 ],
               ),
@@ -125,9 +121,7 @@ class SettingsScreen extends StatelessWidget {
 
                   /// -- Log out Button
                   SizedBox(
-                      width: double.infinity,
-                      child: OutlinedButton(
-                          onPressed: () {}, child: const Text("Logout"))),
+                      width: double.infinity, child: OutlinedButton(onPressed: () {}, child: const Text("Logout"))),
                   const SizedBox(height: UtSizes.spaceBtwSections * 2.5),
                 ],
               ),
