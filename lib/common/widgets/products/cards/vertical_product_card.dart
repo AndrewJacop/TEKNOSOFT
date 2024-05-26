@@ -6,7 +6,7 @@ import 'package:flutter_t_store/common/widgets/images/rounded_image.dart';
 import 'package:flutter_t_store/common/widgets/text/brand_title_text_with_varified_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/product_price_text.dart';
 import 'package:flutter_t_store/common/widgets/text/product_title_text.dart';
-import 'package:flutter_t_store/features/shop/controllers/product_controller.dart';
+import 'package:flutter_t_store/features/shop/controllers/product/product_controller.dart';
 import 'package:flutter_t_store/features/shop/models/product_model.dart';
 import 'package:flutter_t_store/features/shop/views/product_details/product_details_screen.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';

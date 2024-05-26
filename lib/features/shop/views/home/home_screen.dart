@@ -3,7 +3,7 @@ import 'package:flutter_t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:flutter_t_store/common/widgets/products/cards/vertical_product_card.dart';
 import 'package:flutter_t_store/common/widgets/shimmers/vertical_product_shimmer.dart';
 import 'package:flutter_t_store/common/widgets/text/section_heading.dart';
-import 'package:flutter_t_store/features/shop/controllers/product_controller.dart';
+import 'package:flutter_t_store/features/shop/controllers/product/product_controller.dart';
 import 'package:flutter_t_store/features/shop/views/all_products/all_products_screen.dart';
 import 'package:flutter_t_store/features/shop/views/home/widgets/home_appbar.dart';
 import 'package:flutter_t_store/features/shop/views/home/widgets/home_categories_carousel.dart';

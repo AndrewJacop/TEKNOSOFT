@@ -7,6 +7,7 @@ import 'package:flutter_t_store/features/shop/views/product_details/widgets/prod
 import 'package:flutter_t_store/features/shop/views/product_details/widgets/product_meta_data.dart';
 import 'package:flutter_t_store/features/shop/views/product_details/widgets/rating_and_share.dart';
 import 'package:flutter_t_store/features/shop/views/product_review/product_review_screen.dart';
+import 'package:flutter_t_store/utils/constants/enums.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
@@ -25,7 +26,7 @@ class ProductDetailsScreen extends StatelessWidget {
         child: Column(
           children: [
             /// 1 - Product Image Slider
-            const ProductImageSlider(),
+            ProductImageSlider(product: product),
 
             /// 2 - Product Details
             Padding(
@@ -37,11 +38,12 @@ class ProductDetailsScreen extends StatelessWidget {
                   const RatingAndShare(),
 
                   /// Price, titel, Stock & Brand
-                  const ProductMetaData(),
+                  ProductMetaData(product: product),
 
                   /// Atributes
-                  const ProductAttributes(),
-                  const SizedBox(height: UtSizes.spaceBtwSections),
+                  if (product.productType == ProductType.variable.toString()) ProductAttributes(product: product),
+                  if (product.productType == ProductType.variable.toString())
+                    const SizedBox(height: UtSizes.spaceBtwSections),
 
                   // CHECKOUT BUTTON
                   SizedBox(
@@ -59,17 +61,17 @@ class ProductDetailsScreen extends StatelessWidget {
                     showActionButton: false,
                   ),
                   const SizedBox(height: UtSizes.spaceBtwItems),
-                  const ReadMoreText(
-                    'This is a Product description for blue nike shoes. There are moe things that can be added but i am not adding them here , you can check them out on our official website.',
+                  ReadMoreText(
+                    product.description ?? '',
                     trimLines: 2,
                     trimMode: TrimMode.Line,
                     trimCollapsedText: ' Show More',
                     trimExpandedText: ' Less',
-                    moreStyle: TextStyle(
+                    moreStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w800,
                     ),
-                    lessStyle: TextStyle(
+                    lessStyle: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w800,
                     ),
