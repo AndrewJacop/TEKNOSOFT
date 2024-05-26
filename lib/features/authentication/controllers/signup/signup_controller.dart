@@ -20,8 +20,7 @@ class SignupController extends GetxController {
   final lastName = TextEditingController(); // Controller for last name input
   final userName = TextEditingController(); // Controller for user name input
   final password = TextEditingController(); // Controller for password input
-  final phoneNumber =
-      TextEditingController(); // Controller for phone number input
+  final phoneNumber = TextEditingController(); // Controller for phone number input
 
   final passwordHidden = true.obs;
   final termsAgreed = false.obs;
@@ -30,8 +29,7 @@ class SignupController extends GetxController {
   Future<void> signup() async {
     try {
       // Start Loader
-      UtFullScreenLoader.openLoadingDialog(
-          "We are processing your infromation...", UtImages.docerAnimation);
+      UtFullScreenLoader.openLoadingDialog("We are processing your infromation...", UtImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -52,8 +50,7 @@ class SignupController extends GetxController {
       if (!termsAgreed.value) {
         UtLoaders.warningSnackBar(
             title: "Please Accept Privacy Policy",
-            message:
-                "In order to create account, you must have to read and accept the Privacy Policy & Terms of Use.");
+            message: "In order to create account, you must have to read and accept the Privacy Policy & Terms of Use.");
 
         // Remove Loader
         UtFullScreenLoader.stopLoading();
@@ -61,9 +58,8 @@ class SignupController extends GetxController {
       }
 
       // register  user in Firebase Authentication & Save user data
-      final userCredentials = await AuthenticationRepository.instance
-          .registerWithEmailAndPassword(
-              email.text.trim(), password.text.trim());
+      final userCredentials =
+          await AuthenticationRepository.instance.registerWithEmailAndPassword(email.text.trim(), password.text.trim());
 
       // Save Authentication user data in Firebase
       final newUser = UserModel(
@@ -82,9 +78,8 @@ class SignupController extends GetxController {
       UtFullScreenLoader.stopLoading();
 
       // Show Success Message
-      UtLoaders.sucessSnackBar(
-          title: "Congratulations",
-          message: "Your account has been created! Verify email to continue.");
+      UtLoaders.successSnackBar(
+          title: "Congratulations", message: "Your account has been created! Verify email to continue.");
 
       // Move to Verify Email Screen
       Get.to(() => VerifyEmailScreen(email: email.text.trim()));

@@ -32,8 +32,7 @@ class LoginController extends GetxController {
   Future<void> emailAndPasswordSignIn() async {
     try {
       // Start Loader
-      UtFullScreenLoader.openLoadingDialog(
-          "Logging you in...", UtImages.docerAnimation);
+      UtFullScreenLoader.openLoadingDialog("Logging you in...", UtImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -57,17 +56,15 @@ class LoginController extends GetxController {
       }
 
       // log in user using Email and Password Authentication
-      final userCredentials = await AuthenticationRepository.instance
-          .loginWithEmailAndPassword(email.text.trim(), password.text.trim());
+      final userCredentials =
+          await AuthenticationRepository.instance.loginWithEmailAndPassword(email.text.trim(), password.text.trim());
       if (kDebugMode) print(userCredentials);
 
       // Remove Loader
       UtFullScreenLoader.stopLoading();
 
       // Show Success Message
-      UtLoaders.sucessSnackBar(
-          title: "Congratulations",
-          message: "Your are Logged in successfully.");
+      UtLoaders.successSnackBar(title: "Congratulations", message: "Your are Logged in successfully.");
 
       // Move to Verify Email Screen
       AuthenticationRepository.instance.screenRedirect();
@@ -83,8 +80,7 @@ class LoginController extends GetxController {
   Future<void> googleSignIn() async {
     try {
       // Start Loader
-      UtFullScreenLoader.openLoadingDialog(
-          "Logging you in...", UtImages.docerAnimation);
+      UtFullScreenLoader.openLoadingDialog("Logging you in...", UtImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -95,8 +91,7 @@ class LoginController extends GetxController {
       }
 
       // Google Authentication
-      final userCredential =
-          await AuthenticationRepository.instance.signInWithGoogle();
+      final userCredential = await AuthenticationRepository.instance.signInWithGoogle();
       if (kDebugMode) print(userCredential);
 
       // Save User Data
@@ -106,9 +101,7 @@ class LoginController extends GetxController {
       UtFullScreenLoader.stopLoading();
 
       // Show Success Message
-      UtLoaders.sucessSnackBar(
-          title: "Congratulations",
-          message: "Your are Logged in successfully.");
+      UtLoaders.successSnackBar(title: "Congratulations", message: "Your are Logged in successfully.");
 
       // Move to Verify Email Screen
       AuthenticationRepository.instance.screenRedirect();

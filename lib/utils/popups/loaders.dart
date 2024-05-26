@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class UtLoaders {
-  static hideSnackBar() =>
-      ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
+  static hideSnackBar() => ScaffoldMessenger.of(Get.context!).hideCurrentSnackBar();
 
   static customToast({required message}) {
     ScaffoldMessenger.of(Get.context!).showSnackBar(SnackBar(
@@ -30,7 +29,7 @@ class UtLoaders {
         )));
   }
 
-  static sucessSnackBar({required title, message = " ", duration = 3}) {
+  static successSnackBar({required title, message = " ", duration = 3}) {
     Get.snackbar(title, message,
         isDismissible: true,
         shouldIconPulse: true,

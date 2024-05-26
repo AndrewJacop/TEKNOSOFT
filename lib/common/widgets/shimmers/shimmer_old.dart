@@ -3,8 +3,8 @@ import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
 import 'package:shimmer/shimmer.dart';
 
-class ShimmerEffect extends StatelessWidget {
-  const ShimmerEffect({
+class OldShimmerEffect extends StatelessWidget {
+  const OldShimmerEffect({
     super.key,
     required this.width,
     required this.height,

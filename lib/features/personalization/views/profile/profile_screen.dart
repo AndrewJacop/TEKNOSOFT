@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_t_store/common/widgets/appbar/custom_appbar.dart';
 import 'package:flutter_t_store/common/widgets/images/circular_image.dart';
-import 'package:flutter_t_store/common/widgets/loaders/shimmer.dart';
+import 'package:flutter_t_store/common/widgets/shimmers/shimmer_effect.dart';
 import 'package:flutter_t_store/common/widgets/text/section_heading.dart';
 import 'package:flutter_t_store/features/personalization/controllers/user_controller.dart';
 import 'package:flutter_t_store/features/personalization/views/profile/widgets/change_name_screen.dart';
@@ -38,11 +38,8 @@ class ProfileScreen extends StatelessWidget {
                       if (contoller.imageUploading.value) {
                         return const ShimmerEffect(width: 80, height: 80);
                       } else {
-                        final networkImage =
-                            contoller.user.value.profilePicture;
-                        final image = networkImage.isNotEmpty
-                            ? networkImage
-                            : UtImages.user;
+                        final networkImage = contoller.user.value.profilePicture;
+                        final image = networkImage.isNotEmpty ? networkImage : UtImages.user;
                         return CircularImage(
                           isNetworkImage: networkImage.isNotEmpty,
                           image: image,
@@ -64,46 +61,28 @@ class ProfileScreen extends StatelessWidget {
 
               /// Details
               /// Heading Profile Info
-              const SectionHeading(
-                  title: "Profile Information", showActionButton: false),
+              const SectionHeading(title: "Profile Information", showActionButton: false),
               const SizedBox(height: UtSizes.spaceBtwItems),
 
               ProfileMenuTile(
                   title: "Name",
                   value: contoller.user.value.fullName,
                   onPressed: () => Get.to(const ChangeNameScreen())),
-              ProfileMenuTile(
-                  title: "Username",
-                  value: contoller.user.value.username,
-                  onPressed: () {}),
+              ProfileMenuTile(title: "Username", value: contoller.user.value.username, onPressed: () {}),
 
               const SizedBox(height: UtSizes.spaceBtwItems),
               const Divider(),
               const SizedBox(height: UtSizes.spaceBtwItems),
 
               /// Heading Personal Info
-              const SectionHeading(
-                  title: "Personal Information", showActionButton: false),
+              const SectionHeading(title: "Personal Information", showActionButton: false),
               const SizedBox(height: UtSizes.spaceBtwItems),
 
-              ProfileMenuTile(
-                  title: "User ID",
-                  value: contoller.user.value.id,
-                  icon: Iconsax.copy,
-                  onPressed: () {}),
-              ProfileMenuTile(
-                  title: "E-mail",
-                  value: contoller.user.value.email,
-                  onPressed: () {}),
-              ProfileMenuTile(
-                  title: "Phone Number",
-                  value: contoller.user.value.phoneNumber,
-                  onPressed: () {}),
+              ProfileMenuTile(title: "User ID", value: contoller.user.value.id, icon: Iconsax.copy, onPressed: () {}),
+              ProfileMenuTile(title: "E-mail", value: contoller.user.value.email, onPressed: () {}),
+              ProfileMenuTile(title: "Phone Number", value: contoller.user.value.phoneNumber, onPressed: () {}),
               ProfileMenuTile(title: "Gender", value: "Male", onPressed: () {}),
-              ProfileMenuTile(
-                  title: "Date of Birth",
-                  value: "06 Oct, 1993",
-                  onPressed: () {}),
+              ProfileMenuTile(title: "Date of Birth", value: "06 Oct, 1993", onPressed: () {}),
               const Divider(),
               const SizedBox(height: UtSizes.spaceBtwItems),
 

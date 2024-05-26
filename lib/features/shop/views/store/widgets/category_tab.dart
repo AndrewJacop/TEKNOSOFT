@@ -4,6 +4,7 @@ import 'package:flutter_t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:flutter_t_store/common/widgets/products/cards/vertical_product_card.dart';
 import 'package:flutter_t_store/common/widgets/text/section_heading.dart';
 import 'package:flutter_t_store/features/shop/models/category_model.dart';
+import 'package:flutter_t_store/features/shop/models/product_model.dart';
 import 'package:flutter_t_store/utils/constants/image_strings.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 
@@ -36,7 +37,7 @@ class CategoryTab extends StatelessWidget {
             SectionHeading(title: "You might like", onPressed: () {}),
             const SizedBox(height: UtSizes.spaceBtwItems),
 
-            GridLayout(itemCount: 4, itemBuilder: (_, index) => const VerticalProductCard())
+            GridLayout(itemCount: 4, itemBuilder: (_, index) => VerticalProductCard(product: ProductModel.empty()))
           ],
         ),
       ),

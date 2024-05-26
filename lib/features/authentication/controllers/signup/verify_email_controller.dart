@@ -23,9 +23,7 @@ class VerifyEmailController extends GetxController {
   sendEmailVerification() async {
     try {
       await AuthenticationRepository.instance.sendEmailVerification();
-      UtLoaders.sucessSnackBar(
-          title: "Email Sent!",
-          message: "Please Check your inbox and verify your email.");
+      UtLoaders.successSnackBar(title: "Email Sent!", message: "Please Check your inbox and verify your email.");
     } catch (e) {
       UtLoaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
     }
@@ -42,8 +40,7 @@ class VerifyEmailController extends GetxController {
               title: UtTexts.yourAccountCreatedTitle,
               subTitle: UtTexts.yourAccountCreatedSubTitle,
               image: UtImages.successfulRegisterAnimation,
-              onPressed: () =>
-                  AuthenticationRepository.instance.screenRedirect(),
+              onPressed: () => AuthenticationRepository.instance.screenRedirect(),
             ));
       }
     });

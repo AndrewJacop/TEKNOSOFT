@@ -56,17 +56,14 @@ class UserController extends GetxController {
       if (user.value.id.isEmpty) {
         if (userCredential != null) {
           // Convert Name to First and Last Name
-          final nameParts =
-              UserModel.nameparts(userCredential.user!.displayName ?? '');
-          final username =
-              UserModel.genrateUserName(userCredential.user!.displayName ?? '');
+          final nameParts = UserModel.nameparts(userCredential.user!.displayName ?? '');
+          final username = UserModel.genrateUserName(userCredential.user!.displayName ?? '');
 
           // Map data
           final user = UserModel(
             id: userCredential.user!.uid,
             firstName: nameParts[0],
-            lastName:
-                nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
+            lastName: nameParts.length > 1 ? nameParts.sublist(1).join(' ') : '',
             username: username,
             email: userCredential.user!.email ?? '',
             phoneNumber: userCredential.user!.phoneNumber ?? '',
@@ -80,8 +77,7 @@ class UserController extends GetxController {
     } catch (e) {
       UtLoaders.warningSnackBar(
         title: 'Data not saved',
-        message:
-            'Something went wrong white saving your information. You can re-save your data in your Profile.',
+        message: 'Something went wrong white saving your information. You can re-save your data in your Profile.',
       );
     }
   }
@@ -95,28 +91,22 @@ class UserController extends GetxController {
           'Are you sure you want to delete your account permanently? This action is not reversible and all of your data will be removed permanently.',
       confirm: ElevatedButton(
           onPressed: () async => deleteUserAccount(),
-          style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              side: const BorderSide(color: Colors.red)),
+          style: ElevatedButton.styleFrom(backgroundColor: Colors.red, side: const BorderSide(color: Colors.red)),
           child: const Padding(
             padding: EdgeInsets.symmetric(horizontal: UtSizes.lg),
             child: Text('Delete'),
           )),
-      cancel: OutlinedButton(
-          onPressed: () => Navigator.of(Get.overlayContext!).pop(),
-          child: const Text('Cancel')),
+      cancel: OutlinedButton(onPressed: () => Navigator.of(Get.overlayContext!).pop(), child: const Text('Cancel')),
     );
   }
 
   /// Delete User Account
   void deleteUserAccount() async {
     try {
-      UtFullScreenLoader.openLoadingDialog(
-          'Processing...', UtImages.docerAnimation);
+      UtFullScreenLoader.openLoadingDialog('Processing...', UtImages.docerAnimation);
 
       final auth = AuthenticationRepository.instance;
-      final provider =
-          auth.authUser!.providerData.map((e) => e.providerId).first;
+      final provider = auth.authUser!.providerData.map((e) => e.providerId).first;
       if (provider.isNotEmpty) {
         // Re-Verifiy Auth Email
         if (provider == 'google.com') {
@@ -138,8 +128,7 @@ class UserController extends GetxController {
   /// Re-Authenticate before deleteing
   Future<void> reAuthenticateEmailAndPasswordUser() async {
     try {
-      UtFullScreenLoader.openLoadingDialog(
-          'Processing...', UtImages.docerAnimation);
+      UtFullScreenLoader.openLoadingDialog('Processing...', UtImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -157,8 +146,8 @@ class UserController extends GetxController {
       }
 
       // Re-Auth then Delete
-      await AuthenticationRepository.instance.reAuthenticateEmailAndPassword(
-          verifyEmail.text.trim(), verifyPassword.text.trim());
+      await AuthenticationRepository.instance
+          .reAuthenticateEmailAndPassword(verifyEmail.text.trim(), verifyPassword.text.trim());
       await AuthenticationRepository.instance.deleteAccount();
 
       UtFullScreenLoader.stopLoading();
@@ -182,8 +171,7 @@ class UserController extends GetxController {
 
       if (image != null) {
         // Upload image
-        final imageUrl =
-            await userRepository.uploadImage('Users/Images/Profile/', image);
+        final imageUrl = await userRepository.uploadImage('Users/Images/Profile/', image);
         // Update User Image Record in database
         Map<String, dynamic> json = {'ProfilePicture': imageUrl};
         await userRepository.updateSingleField(json);
@@ -192,14 +180,13 @@ class UserController extends GetxController {
         user.refresh();
 
         // Success Snack Bar
-        UtLoaders.sucessSnackBar(
+        UtLoaders.successSnackBar(
           title: 'Congratulations!',
           message: 'Your Profile Picture has been Updated Successfully',
         );
       }
     } catch (e) {
-      UtLoaders.errorSnackBar(
-          title: 'Oh Snap!', message: "Something went wrong: $e");
+      UtLoaders.errorSnackBar(title: 'Oh Snap!', message: "Something went wrong: $e");
     } finally {
       imageUploading.value = false;
     }

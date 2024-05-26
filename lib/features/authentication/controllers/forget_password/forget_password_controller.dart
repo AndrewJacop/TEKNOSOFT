@@ -18,8 +18,7 @@ class ForgetPasswordController extends GetxController {
   sendPasswordResetEmail() async {
     try {
       // Start loading
-      UtFullScreenLoader.openLoadingDialog(
-          'Processing your request ...', UtImages.docerAnimation);
+      UtFullScreenLoader.openLoadingDialog('Processing your request ...', UtImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -35,16 +34,13 @@ class ForgetPasswordController extends GetxController {
       }
 
       // Send Email to reset password
-      await AuthenticationRepository.instance
-          .sendPasswordResetEmail(email.text.trim());
+      await AuthenticationRepository.instance.sendPasswordResetEmail(email.text.trim());
 
       // Remove Loader
       UtFullScreenLoader.stopLoading();
 
       // Show success Screen
-      UtLoaders.sucessSnackBar(
-          title: 'Email sent',
-          message: "Email Link sent to reset your password.".tr);
+      UtLoaders.successSnackBar(title: 'Email sent', message: "Email Link sent to reset your password.".tr);
 
       // Redirect
       Get.to(() => ResetPasswordScreen(email: email.text.trim()));
@@ -61,8 +57,7 @@ class ForgetPasswordController extends GetxController {
   resendPasswordResetEmail(String email) async {
     try {
       // Start loading
-      UtFullScreenLoader.openLoadingDialog(
-          'Processing your request ...', UtImages.docerAnimation);
+      UtFullScreenLoader.openLoadingDialog('Processing your request ...', UtImages.docerAnimation);
 
       // Check Internet Connectivity
       final isConnected = await NetworkManager.instance.isConnected();
@@ -78,9 +73,7 @@ class ForgetPasswordController extends GetxController {
       UtFullScreenLoader.stopLoading();
 
       // Show success Screen
-      UtLoaders.sucessSnackBar(
-          title: 'Email sent',
-          message: "Email Link sent to reset your password.".tr);
+      UtLoaders.successSnackBar(title: 'Email sent', message: "Email Link sent to reset your password.".tr);
     } catch (e) {
       // Remove Loader
       UtFullScreenLoader.stopLoading();

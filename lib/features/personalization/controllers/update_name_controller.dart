@@ -63,7 +63,7 @@ class UpdateNameController extends GetxController {
       UtFullScreenLoader.stopLoading();
 
       // Show success messege
-      UtLoaders.sucessSnackBar(
+      UtLoaders.successSnackBar(
         title: 'Congratulations',
         message: 'Your Name has been updated successfully',
       );

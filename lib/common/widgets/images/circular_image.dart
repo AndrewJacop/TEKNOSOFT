@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_t_store/common/widgets/loaders/shimmer.dart';
+import 'package:flutter_t_store/common/widgets/shimmers/shimmer_effect.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 
@@ -46,8 +46,7 @@ class CircularImage extends StatelessWidget {
                   color: overlayColor,
                   imageUrl: image,
                   errorWidget: (context, url, error) => const Icon(Icons.error),
-                  progressIndicatorBuilder: (context, url, progress) =>
-                      ShimmerEffect(width: width, height: height),
+                  progressIndicatorBuilder: (context, url, progress) => ShimmerEffect(width: width, height: height),
                 )
               : Image(
                   fit: fit,

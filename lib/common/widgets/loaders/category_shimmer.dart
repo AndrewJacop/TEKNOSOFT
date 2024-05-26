@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 
-import 'shimmer.dart';
+import '../shimmers/shimmer_effect.dart';
 
 class CategoryShimmer extends StatelessWidget {
   const CategoryShimmer({
