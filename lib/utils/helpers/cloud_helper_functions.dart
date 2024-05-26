@@ -1,4 +1,4 @@
-/* import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -35,10 +35,7 @@ class UtCloudHelperFunctions {
   /// If an error occurs, it returns a generic error message.
   /// Otherwise, it returns null.
   static Widget? checkMultiRecordState<T>(
-      {required AsyncSnapshot<List<T>> snapshot,
-      Widget? loader,
-      Widget? error,
-      Widget? nothingFound}) {
+      {required AsyncSnapshot<List<T>> snapshot, Widget? loader, Widget? error, Widget? nothingFound}) {
     if (snapshot.connectionState == ConnectionState.waiting) {
       if (loader != null) return loader;
       return const Center(child: CircularProgressIndicator());
@@ -89,4 +86,3 @@ class UtCloudHelperFunctions {
     }
   }
 }
- */
