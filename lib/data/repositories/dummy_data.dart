@@ -1,7 +1,22 @@
-import '../../../features/shop/models/category_model.dart';
-import '../../../utils/constants/image_strings.dart';
+import 'package:flutter_t_store/features/shop/models/banner_model.dart';
+import 'package:flutter_t_store/routes/routes.dart';
+
+import '../../features/shop/models/category_model.dart';
+import '../../utils/constants/image_strings.dart';
 
 class DummyData {
+  /// -- Banners
+  static final List<BannerModel> banners = [
+    BannerModel(imageUrl: UtImages.banner1, targetScreen: UtRoutes.order, active: false),
+    BannerModel(imageUrl: UtImages.banner2, targetScreen: UtRoutes.cart, active: true),
+    BannerModel(imageUrl: UtImages.banner3, targetScreen: UtRoutes.favourites, active: true),
+    BannerModel(imageUrl: UtImages.banner4, targetScreen: UtRoutes.search, active: true),
+    BannerModel(imageUrl: UtImages.banner5, targetScreen: UtRoutes.settings, active: true),
+    BannerModel(imageUrl: UtImages.banner6, targetScreen: UtRoutes.userAddress, active: true),
+    BannerModel(imageUrl: UtImages.banner8, targetScreen: UtRoutes.checkout, active: false),
+  ];
+
+  /// Categories
   static final List<CategoryModel> categories = [
     CategoryModel(id: '1', image: UtImages.sportIcon, name: 'Sports', isFeatured: true),
     CategoryModel(id: '5', image: UtImages.furnitureIcon, name: 'Furniture', isFeatured: true),

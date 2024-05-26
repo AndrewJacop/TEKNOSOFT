@@ -7,6 +7,7 @@ import 'package:flutter_t_store/features/personalization/views/settings/widgets/
 import 'package:flutter_t_store/features/personalization/views/settings/widgets/user_profile_tile.dart';
 import 'package:flutter_t_store/features/shop/views/cart/cart_screen.dart';
 import 'package:flutter_t_store/features/shop/views/home/widgets/primary_header_container.dart';
+import 'package:flutter_t_store/features/shop/views/load_data/load_data.dart';
 import 'package:flutter_t_store/features/shop/views/orders/orders_screen.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
@@ -95,7 +96,8 @@ class SettingsScreen extends StatelessWidget {
                     showActionButton: false,
                   ),
                   const SizedBox(height: UtSizes.spaceBtwItems),
-                  const SettingsMenuTile(
+                  SettingsMenuTile(
+                      onTap: () => Get.to(() => const LoadDataScreen()),
                       icon: Iconsax.document_upload,
                       title: "Load Data",
                       subTitle: "Upload Data to your Cloud Firebase"),

@@ -9,7 +9,6 @@ import 'package:flutter_t_store/features/shop/views/home/widgets/primary_header_
 import 'package:flutter_t_store/features/shop/views/home/widgets/promo_slider.dart';
 import 'package:flutter_t_store/features/shop/views/home/widgets/search_container.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
-import 'package:flutter_t_store/utils/constants/image_strings.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +21,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Heading
+            /// Header
             const PrimaryHeaderContainer(
                 child: Column(
               children: [
@@ -61,27 +60,15 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     // Promo SLider
-                    const PromoSlider(
-                      banners: [
-                        UtImages.promoBanner1,
-                        UtImages.promoBanner2,
-                        UtImages.promoBanner3,
-                      ],
-                    ),
+                    const PromoSlider(),
                     const SizedBox(height: UtSizes.spaceBtwSections),
 
                     // Heading
-                    SectionHeading(
-                      title: "Popular Products",
-                      onPressed: () => Get.to(() => const AllProductsScreen()),
-                    ),
+                    SectionHeading(title: "Popular Products", onPressed: () => Get.to(() => const AllProductsScreen())),
                     const SizedBox(height: UtSizes.spaceBtwItems),
 
                     // Popular Products
-                    GridLayout(
-                      itemCount: 4,
-                      itemBuilder: (_, index) => const VerticalProductCard(),
-                    ),
+                    GridLayout(itemCount: 4, itemBuilder: (_, index) => const VerticalProductCard()),
                   ],
                 ))
           ],

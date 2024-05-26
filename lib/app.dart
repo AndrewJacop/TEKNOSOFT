@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_t_store/bindings/general_bindings.dart';
+import 'package:flutter_t_store/routes/app_routes.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/text_strings.dart';
 import 'package:flutter_t_store/utils/theme/theme.dart';
@@ -18,6 +19,7 @@ class App extends StatelessWidget {
       darkTheme: UtAppTheme.darkTheme,
       debugShowCheckedModeBanner: false,
       initialBinding: GeneralBindings(),
+      getPages: AppRoutes.pages,
 
       /// Show Loader or Circular Progress Indicator meanwhite Authentication Repository is deciding to show relevant screen.
       home: const Scaffold(
