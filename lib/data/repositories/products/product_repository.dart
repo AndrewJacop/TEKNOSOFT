@@ -37,6 +37,7 @@ class ProductRepository extends GetxController {
     }
   }
 
+  /// Get All featured products
   Future<List<ProductModel>> getAllFeaturedProducts() async {
     try {
       final snapshot = await _db.collection("Products").where("IsFeatured", isEqualTo: true).get();
@@ -53,6 +54,7 @@ class ProductRepository extends GetxController {
     }
   }
 
+  /// Get Products based on a Query
   Future<List<ProductModel>> fetchProductsByQuery(Query query) async {
     try {
       final querySnapshot = await query.get();
@@ -86,6 +88,7 @@ class ProductRepository extends GetxController {
     }
   }
 
+  /// Get Products based on a Brand
   Future<List<ProductModel>> getProductsForBrand({required String brandId, int limit = -1}) async {
     try {
       final querySnapshot = (limit == -1)
@@ -127,7 +130,7 @@ class ProductRepository extends GetxController {
     }
   }
 
-  /// Upload Dummy Data to Cloud firestore
+  /// Upload Dummy Products Data to Cloud firestore
   Future<void> uploadDummyData(List<ProductModel> products) async {
     try {
       // Loader

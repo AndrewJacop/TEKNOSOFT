@@ -54,18 +54,19 @@ class VerticalProductCard extends StatelessWidget {
                     RoundedImage(imageUrl: product.thumbnail, applyImageRadius: true, isNetworkImage: true),
 
                     /// Discount tag
-                    Positioned(
-                      top: 12,
-                      child: RoundedContainer(
-                        radius: UtSizes.sm,
-                        backgroundColor: UtColors.secondary.withOpacity(0.8),
-                        padding: const EdgeInsets.symmetric(horizontal: UtSizes.sm, vertical: UtSizes.xs),
-                        child: Text(
-                          "$salePercentage%",
-                          style: Theme.of(context).textTheme.labelLarge!.apply(color: UtColors.black),
+                    if (salePercentage != null)
+                      Positioned(
+                        top: 12,
+                        child: RoundedContainer(
+                          radius: UtSizes.sm,
+                          backgroundColor: UtColors.secondary.withOpacity(0.8),
+                          padding: const EdgeInsets.symmetric(horizontal: UtSizes.sm, vertical: UtSizes.xs),
+                          child: Text(
+                            "$salePercentage%",
+                            style: Theme.of(context).textTheme.labelLarge!.apply(color: UtColors.black),
+                          ),
                         ),
                       ),
-                    ),
 
                     /// Favorits icon button
                     const Positioned(

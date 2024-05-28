@@ -4,9 +4,12 @@ import 'package:flutter_t_store/common/widgets/appbar/custom_tabbar.dart';
 import 'package:flutter_t_store/common/widgets/brands/brand_card.dart';
 import 'package:flutter_t_store/common/widgets/layouts/grid_layout.dart';
 import 'package:flutter_t_store/common/widgets/products/cart/cart_counter_icon.dart';
+import 'package:flutter_t_store/common/widgets/shimmers/brands_shimmer.dart';
 import 'package:flutter_t_store/common/widgets/text/section_heading.dart';
+import 'package:flutter_t_store/features/shop/controllers/brand_controller.dart';
 import 'package:flutter_t_store/features/shop/controllers/category_controller.dart';
 import 'package:flutter_t_store/features/shop/views/brands/all_brands_screen.dart';
+import 'package:flutter_t_store/features/shop/views/brands/brand_products_screen.dart';
 import 'package:flutter_t_store/features/shop/views/home/widgets/search_container.dart';
 import 'package:flutter_t_store/features/shop/views/store/widgets/category_tab.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
@@ -21,6 +24,7 @@ class StoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isDark = UtHelperFunctions.isDarkMode(context);
+    final brandsController = Get.put(BrandController());
     final categories = CategoryController.instance.featuredCategories;
     return DefaultTabController(
       length: categories.length,
@@ -48,8 +52,9 @@ class StoreScreen extends StatelessWidget {
                       physics: const NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       children: [
-                        /// -- Search Bar
                         const SizedBox(height: UtSizes.spaceBtwItems),
+
+                        /// -- Search Bar
                         const SearchContainer(
                           text: 'Search in Store',
                           showBoarder: true,
@@ -64,13 +69,27 @@ class StoreScreen extends StatelessWidget {
                         const SizedBox(height: UtSizes.spaceBtwItems / 1.5),
 
                         // -- Brand GRID
-                        GridLayout(
-                          itemCount: 4,
-                          mainAxisExtent: 80,
-                          itemBuilder: (_, index) {
-                            return const BrandCard(showBorder: true);
-                          },
-                        ),
+                        Obx(() {
+                          if (brandsController.isLoading.value) return const BrandsShimmer();
+                          if (brandsController.featuredBrands.isEmpty) {
+                            return Center(
+                              child: Text('No Data Found!',
+                                  style: Theme.of(context).textTheme.bodyMedium!.apply(color: Colors.white)),
+                            );
+                          }
+                          return GridLayout(
+                            itemCount: brandsController.featuredBrands.length,
+                            mainAxisExtent: 80,
+                            itemBuilder: (_, index) {
+                              final brand = brandsController.featuredBrands[index];
+                              return BrandCard(
+                                showBorder: true,
+                                brand: brand,
+                                onTap: () => Get.to(() => BrandProductsScreen(brand: brand)),
+                              );
+                            },
+                          );
+                        }),
                       ],
                     ),
                   ),

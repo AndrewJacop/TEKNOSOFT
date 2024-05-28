@@ -23,7 +23,7 @@ class BrandModel {
     };
   }
 
-  /// Mop Json-oriented document snapshot Json to UserModel
+  /// Mop Json-oriented document snapshot Json to BrandModel
   factory BrandModel.fromJson(Map<String, dynamic> document) {
     final data = document;
     if (data.isEmpty) {
