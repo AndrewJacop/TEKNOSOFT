@@ -42,11 +42,13 @@ class BrandRepository extends GetxController {
       if (brandCategoryQuery.docs.isEmpty) {
         return [];
       }
+
       // Extract brandIds from the document
       List<String> brandIds = brandCategoryQuery.docs.map((doc) => doc["brandId"] as String).toList();
 
       // Query toget all the docments where the brandid is inthe list of brandIds, Fieldpath.documentid to Query dcuments in collection
       final brandsQuery = await _db.collection("Brands").where(FieldPath.documentId, whereIn: brandIds).limit(2).get();
+
       // Extract brand names or other relevant data from the documents
       List<BrandModel> brands = brandsQuery.docs.map((doc) => BrandModel.fromSnapshot(doc)).toList();
 

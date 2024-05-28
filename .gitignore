@@ -44,4 +44,4 @@ app.*.map.json
 notes.txt
 
 # FIrebase cofiguration
-/lib/firebase_options.dart
+firebase_options.dart

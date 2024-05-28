@@ -15,11 +15,15 @@ class BrandCard extends StatelessWidget {
     required this.showBorder,
     this.onTap,
     required this.brand,
+    this.fit = BoxFit.cover,
+    this.imageSize = 40.0,
   });
 
   final bool showBorder;
   final void Function()? onTap;
   final BrandModel brand;
+  final BoxFit fit;
+  final double imageSize;
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +39,10 @@ class BrandCard extends StatelessWidget {
             // -- Icon
             Flexible(
               child: CircularImage(
+                fit: fit,
                 image: brand.image,
+                height: imageSize,
+                width: imageSize,
                 isNetworkImage: true,
                 backgroundColor: Colors.transparent,
                 overlayColor: (isDark ? UtColors.white : UtColors.black),
