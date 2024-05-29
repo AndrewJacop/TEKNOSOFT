@@ -1,4 +1,4 @@
-import 'package:flutter_t_store/features/shop/controllers/product/cart_controller.dart';
+import 'package:flutter_t_store/features/shop/controllers/cart_controller.dart';
 import 'package:flutter_t_store/features/shop/controllers/product/images_controller.dart';
 import 'package:flutter_t_store/features/shop/models/product_model.dart';
 import 'package:flutter_t_store/features/shop/models/product_variation_model.dart';

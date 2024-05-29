@@ -8,6 +8,7 @@ class CartItemModel {
   String? brandName;
   Map<String, String>? selectedVariation;
 
+  /// Constructor
   CartItemModel({
     required this.productId,
     required this.quantity,
@@ -19,8 +20,10 @@ class CartItemModel {
     this.selectedVariation,
   });
 
+  /// Empty Cart
   static CartItemModel empty() => CartItemModel(productId: "", quantity: 0);
 
+  /// Convert a Cart Item to a JSON Map
   Map<String, dynamic> toJson() {
     return {
       "productId": productId,
@@ -34,6 +37,7 @@ class CartItemModel {
     };
   }
 
+  /// Create CartItem from a JSON Map
   factory CartItemModel.fromJson(Map<String, dynamic> json) {
     return CartItemModel(
         productId: json['productId'] as String,
@@ -43,8 +47,7 @@ class CartItemModel {
         quantity: json['quantity'] as int,
         variationId: json['variationId'] as String,
         brandName: json['brandName'],
-        selectedVariation: json["selectedVariation"] != null
-            ? Map<String, String>.from(json["selectedVariation"])
-            : null);
+        selectedVariation:
+            json["selectedVariation"] != null ? Map<String, String>.from(json["selectedVariation"]) : null);
   }
 }

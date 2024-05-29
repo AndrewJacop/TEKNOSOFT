@@ -21,7 +21,7 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: const BottomAddToCart(),
+      bottomNavigationBar: BottomAddToCart(product: product),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -45,21 +45,15 @@ class ProductDetailsScreen extends StatelessWidget {
                   if (product.productType == ProductType.variable.toString())
                     const SizedBox(height: UtSizes.spaceBtwSections),
 
-                  // CHECKOUT BUTTON
+                  // Checkout Button
                   SizedBox(
                     width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('Checkout'),
-                    ),
+                    child: ElevatedButton(onPressed: () {}, child: const Text('Checkout')),
                   ),
                   const SizedBox(height: UtSizes.spaceBtwSections),
 
-                  // DESCRIPTION
-                  const SectionHeading(
-                    title: 'Description',
-                    showActionButton: false,
-                  ),
+                  // Description
+                  const SectionHeading(title: 'Description', showActionButton: false),
                   const SizedBox(height: UtSizes.spaceBtwItems),
                   ReadMoreText(
                     product.description ?? '',
@@ -71,7 +65,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                   ),
 
-                  // REVIEWS
+                  // Reviews
                   const Divider(),
                   const SizedBox(height: UtSizes.spaceBtwItems),
                   Row(
@@ -82,7 +76,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         showActionButton: false,
                       ),
                       IconButton(
-                        onPressed: () => {Get.to(() => const ProductReviewScreen())},
+                        onPressed: () => Get.to(() => const ProductReviewScreen()),
                         icon: const Icon(Iconsax.arrow_right_3, size: 18),
                       ),
                     ],

@@ -2,24 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_t_store/common/widgets/images/rounded_image.dart';
 import 'package:flutter_t_store/common/widgets/text/brand_title_text_with_varified_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/product_title_text.dart';
+import 'package:flutter_t_store/features/shop/models/cart_item_model.dart';
 import 'package:flutter_t_store/utils/constants/colors.dart';
-import 'package:flutter_t_store/utils/constants/image_strings.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
 
 class CartItem extends StatelessWidget {
-  const CartItem({
-    super.key,
-  });
+  const CartItem({super.key, required this.cartItem});
+
+  final CartItemModel cartItem;
 
   @override
   Widget build(BuildContext context) {
     final isDark = UtHelperFunctions.isDarkMode(context);
     return Row(
       children: [
-        // IMAGE
+        // Image
         RoundedImage(
-          imageUrl: UtImages.productImage1,
+          imageUrl: cartItem.image ?? '',
+          isNetworkImage: true,
           width: 60,
           height: 60,
           padding: const EdgeInsets.all(UtSizes.sm),
@@ -28,42 +29,27 @@ class CartItem extends StatelessWidget {
 
         const SizedBox(width: UtSizes.spaceBtwItems),
 
-        // TITLE, PRICE, SIZE
+        // Title, Price, Size
         Expanded(
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const BrandTitleTextWithVerifiedIcon(title: 'Nike'),
+              BrandTitleTextWithVerifiedIcon(title: cartItem.brandName ?? ''),
 
-              const Flexible(
-                child: ProductTitleText(
-                  title: 'Green Sports Shoes',
-                  maxLines: 1,
-                ),
+              Flexible(
+                child: ProductTitleText(title: cartItem.title, maxLines: 1),
               ),
 
-              // ATTRIBUTES
+              // Attributes
               Text.rich(
                 TextSpan(
-                  children: [
-                    TextSpan(
-                      text: 'Colors',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    TextSpan(
-                      text: 'Green',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                    TextSpan(
-                      text: 'Size',
-                      style: Theme.of(context).textTheme.bodySmall,
-                    ),
-                    TextSpan(
-                      text: 'UK 09',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  ],
+                  children: (cartItem.selectedVariation ?? {}).entries.map((e) {
+                    return TextSpan(children: [
+                      TextSpan(text: '${e.key} ', style: Theme.of(context).textTheme.bodySmall),
+                      TextSpan(text: '${e.value} ', style: Theme.of(context).textTheme.bodyLarge),
+                    ]);
+                  }).toList(),
                 ),
               ),
             ],

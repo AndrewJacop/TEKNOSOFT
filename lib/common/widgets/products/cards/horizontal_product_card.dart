@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
 import 'package:flutter_t_store/common/widgets/images/rounded_image.dart';
+import 'package:flutter_t_store/common/widgets/products/add_to_cart/add_to_cart_button.dart';
 import 'package:flutter_t_store/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/brand_title_text_with_varified_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/product_price_text.dart';
@@ -11,7 +12,6 @@ import 'package:flutter_t_store/utils/constants/colors.dart';
 import 'package:flutter_t_store/utils/constants/enums.dart';
 import 'package:flutter_t_store/utils/constants/sizes.dart';
 import 'package:flutter_t_store/utils/helpers/helper_functions.dart';
-import 'package:iconsax/iconsax.dart';
 
 class HorizontalProductCard extends StatelessWidget {
   const HorizontalProductCard({super.key, required this.product});
@@ -114,20 +114,7 @@ class HorizontalProductCard extends StatelessWidget {
                       ),
 
                       // Add to Cart
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: UtColors.dark,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(UtSizes.cardRadiusMd),
-                            bottomRight: Radius.circular(UtSizes.productImageRadius),
-                          ),
-                        ),
-                        child: const SizedBox(
-                          width: UtSizes.iconLg * 1.2,
-                          height: UtSizes.iconLg * 1.2,
-                          child: Center(child: Icon(Iconsax.add, color: UtColors.white)),
-                        ),
-                      ),
+                      ProductCardAddToCartButton(product: product),
                     ],
                   ),
                 ],

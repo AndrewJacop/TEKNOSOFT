@@ -9,12 +9,7 @@ class SuccessScreen extends StatelessWidget {
   final String title, subTitle, image;
   final VoidCallback? onPressed;
 
-  const SuccessScreen(
-      {super.key,
-      required this.title,
-      required this.subTitle,
-      required this.image,
-      this.onPressed});
+  const SuccessScreen({super.key, required this.title, required this.subTitle, required this.image, this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +20,7 @@ class SuccessScreen extends StatelessWidget {
           child: Column(
             children: [
               /// Image
-              Lottie.asset(
-                image,
-                width: UtHelperFunctions.screenWidth() * 0.6,
-              ),
+              Lottie.asset(image, width: UtHelperFunctions.screenWidth() * 0.6),
               const SizedBox(height: UtSizes.spaceBtwSections),
 
               /// Title & Subtitle
