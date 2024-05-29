@@ -41,11 +41,7 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       /// Heading
-                      SectionHeading(
-                        title: 'Polpular Categories',
-                        showActionButton: false,
-                        textColor: UtColors.white,
-                      ),
+                      SectionHeading(title: 'Polpular Categories', showActionButton: false, textColor: UtColors.white),
                       SizedBox(height: UtSizes.spaceBtwItems),
 
                       /// Categoires

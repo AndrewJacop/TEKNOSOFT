@@ -33,21 +33,21 @@ class HorizontalProductCard extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // THUMBNAIL
+          // Thumbnail
           RoundedContainer(
             height: 120,
             padding: const EdgeInsets.all(UtSizes.sm),
             backgroundColor: isDark ? UtColors.dark : UtColors.light,
             child: Stack(
               children: [
-                // THUMBNAIL IMAGE
+                // Thumbnail Image
                 SizedBox(
                   height: 120,
                   width: 120,
                   child: RoundedImage(imageUrl: product.thumbnail, isNetworkImage: true, applyImageRadius: true),
                 ),
 
-                // SALE TAG
+                // Sale Tag
                 if (salePercentage != null)
                   Positioned(
                     top: 12,
@@ -62,15 +62,15 @@ class HorizontalProductCard extends StatelessWidget {
                     ),
                   ),
 
-                // FAVORITE ICON BUTTON
+                // Favourite Icon Button
                 Positioned(top: 0, right: 0, child: FavouriteIcon(productId: product.id)),
               ],
             ),
           ),
 
-          // DETAILS
+          // Details
           SizedBox(
-            width: 142,
+            width: 172,
             child: Padding(
               padding: const EdgeInsets.only(top: UtSizes.sm, left: UtSizes.sm),
               child: Column(
@@ -79,7 +79,7 @@ class HorizontalProductCard extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // TITLE
+                      // Title
                       ProductTitleText(title: product.title, smallSize: true),
                       const SizedBox(height: UtSizes.spaceBtwItems / 2),
                       BrandTitleTextWithVerifiedIcon(title: product.brand!.name),
@@ -89,7 +89,7 @@ class HorizontalProductCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      // PRICING
+                      // Price
                       Flexible(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -107,15 +107,13 @@ class HorizontalProductCard extends StatelessWidget {
                               ),
                             Padding(
                               padding: const EdgeInsets.only(left: UtSizes.sm),
-                              child: ProductPriceText(
-                                price: controller.getProductPrice(product),
-                              ),
+                              child: ProductPriceText(price: controller.getProductPrice(product)),
                             ),
                           ],
                         ),
                       ),
 
-                      // ADD TO CART
+                      // Add to Cart
                       Container(
                         decoration: const BoxDecoration(
                           color: UtColors.dark,
@@ -127,9 +125,7 @@ class HorizontalProductCard extends StatelessWidget {
                         child: const SizedBox(
                           width: UtSizes.iconLg * 1.2,
                           height: UtSizes.iconLg * 1.2,
-                          child: Center(
-                            child: Icon(Iconsax.add, color: UtColors.white),
-                          ),
+                          child: Center(child: Icon(Iconsax.add, color: UtColors.white)),
                         ),
                       ),
                     ],
