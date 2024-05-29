@@ -67,14 +67,8 @@ class ProductDetailsScreen extends StatelessWidget {
                     trimMode: TrimMode.Line,
                     trimCollapsedText: ' Show More',
                     trimExpandedText: ' Less',
-                    moreStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                    ),
-                    lessStyle: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w800,
-                    ),
+                    moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
+                    lessStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.w800),
                   ),
 
                   // REVIEWS
@@ -89,10 +83,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () => {Get.to(() => const ProductReviewScreen())},
-                        icon: const Icon(
-                          Iconsax.arrow_right_3,
-                          size: 18,
-                        ),
+                        icon: const Icon(Iconsax.arrow_right_3, size: 18),
                       ),
                     ],
                   ),

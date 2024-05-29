@@ -2,7 +2,7 @@ import 'package:get_storage/get_storage.dart';
 
 class UtLocalStorage {
   late final GetStorage _storage;
-  //Singleton instance
+  // Singleton instance
   static UtLocalStorage? _instance;
 
   UtLocalStorage._internal();
@@ -44,9 +44,7 @@ class UtLocalStorage {
 // class UtLocalStorage {
 //   static final UtLocalStorage _instance = UtLocalStorage._internal();
 
-//   factory UtLocalStorage() {
-//     return _instance;
-//   }
+//   factory UtLocalStorage() => _instance;
 
 //   UtLocalStorage._internal();
 

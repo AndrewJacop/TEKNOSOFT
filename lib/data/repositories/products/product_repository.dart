@@ -72,6 +72,7 @@ class ProductRepository extends GetxController {
     }
   }
 
+  /// Get Favourite Products based on a List of IDs comming from user local storage bucket
   Future<List<ProductModel>> getFavouriteProducts(List<String> productIds) async {
     try {
       final snapshot = await _db.collection("Products").where(FieldPath.documentId, whereIn: productIds).get();
@@ -107,6 +108,7 @@ class ProductRepository extends GetxController {
     }
   }
 
+  /// Get Products based on a Category
   Future<List<ProductModel>> getProductsForCategory({required String categoryId, int limit = -1}) async {
     try {
       QuerySnapshot productsCategoryQuery = (limit == -1)

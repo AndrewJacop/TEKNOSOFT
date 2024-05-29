@@ -11,6 +11,7 @@ import 'package:flutter_t_store/utils/exceptions/firebase_auth_exceptions.dart';
 import 'package:flutter_t_store/utils/exceptions/firebase_exceptions.dart';
 import 'package:flutter_t_store/utils/exceptions/format_exceptions.dart';
 import 'package:flutter_t_store/utils/exceptions/platform_exceptions.dart';
+import 'package:flutter_t_store/utils/local_storage/storage_utility.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -22,6 +23,7 @@ class AuthenticationRepository extends GetxController {
   final deviceStorage = GetStorage();
   final _auth = FirebaseAuth.instance;
 
+  /// get Authenticated User Data
   User? get authUser => _auth.currentUser;
 
   /// Called from main.dart on app launch
@@ -40,6 +42,9 @@ class AuthenticationRepository extends GetxController {
     if (user != null) {
       // If user is logged in
       if (user.emailVerified) {
+        // Initilize User-specefic Storage
+        await UtLocalStorage.init(user.uid);
+
         // if user's email is verified, navigate to the navigation screen
         Get.offAll(() => const NavigationMenu());
       } else {
@@ -56,21 +61,17 @@ class AuthenticationRepository extends GetxController {
       deviceStorage.writeIfNull("IsFirstTime", true);
       // Check if it's the first time launching the app
       deviceStorage.read("IsFirstTime") != true
-          ? Get.offAll(() =>
-              const LoginScreen()) // Redirect to Login Screen if not the first time
-          : Get.offAll(() =>
-              const OnBoardingScreen()); // Redirect to OnBoarding Screen if it's the first time
+          ? Get.offAll(() => const LoginScreen()) // Redirect to Login Screen if not the first time
+          : Get.offAll(() => const OnBoardingScreen()); // Redirect to OnBoarding Screen if it's the first time
     }
   }
 
 /* -------------------------- Emain & Password sign-in -------------------------- */
 
   /// [Email Authentication] - Sign In
-  Future<UserCredential> loginWithEmailAndPassword(
-      String email, String password) async {
+  Future<UserCredential> loginWithEmailAndPassword(String email, String password) async {
     try {
-      return await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
+      return await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       throw UtFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -85,11 +86,9 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// [Email Authentication] - Register Future<UserCredential>
-  Future<UserCredential> registerWithEmailAndPassword(
-      String email, String password) async {
+  Future<UserCredential> registerWithEmailAndPassword(String email, String password) async {
     try {
-      return await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+      return await _auth.createUserWithEmailAndPassword(email: email, password: password);
     } on FirebaseAuthException catch (e) {
       throw UtFirebaseAuthException(e.code).message;
     } on FirebaseException catch (e) {
@@ -104,12 +103,10 @@ class AuthenticationRepository extends GetxController {
   }
 
   /// [Re Authenticatate] - ReAuthenticate User
-  Future<void> reAuthenticateEmailAndPassword(
-      String email, String password) async {
+  Future<void> reAuthenticateEmailAndPassword(String email, String password) async {
     try {
       // Create a credential
-      AuthCredential credential =
-          EmailAuthProvider.credential(email: email, password: password);
+      AuthCredential credential = EmailAuthProvider.credential(email: email, password: password);
 
       // Re-Authenticate
       await _auth.currentUser!.reauthenticateWithCredential(credential);
@@ -169,12 +166,11 @@ class AuthenticationRepository extends GetxController {
       final GoogleSignInAccount? userAccount = await GoogleSignIn().signIn();
 
       // Obtain the auth details from the request
-      final GoogleSignInAuthentication? googleAuth =
-          await userAccount?.authentication;
+      final GoogleSignInAuthentication? googleAuth = await userAccount?.authentication;
 
       // Create a new Credential
-      final userCredential = GoogleAuthProvider.credential(
-          accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
+      final userCredential =
+          GoogleAuthProvider.credential(accessToken: googleAuth?.accessToken, idToken: googleAuth?.idToken);
 
       // Once signed in, return the User Credentials
       return await _auth.signInWithCredential(userCredential);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_t_store/common/styles/shadows.dart';
 import 'package:flutter_t_store/common/widgets/custom_shapes/containers/rounded_container.dart';
-import 'package:flutter_t_store/common/widgets/icons/circular_icon.dart';
 import 'package:flutter_t_store/common/widgets/images/rounded_image.dart';
+import 'package:flutter_t_store/common/widgets/products/favourite_icon/favourite_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/brand_title_text_with_varified_icon.dart';
 import 'package:flutter_t_store/common/widgets/text/product_price_text.dart';
 import 'package:flutter_t_store/common/widgets/text/product_title_text.dart';
@@ -69,11 +69,7 @@ class VerticalProductCard extends StatelessWidget {
                       ),
 
                     /// Favorits icon button
-                    const Positioned(
-                      top: 0,
-                      right: 0,
-                      child: CircularIcon(icon: Iconsax.heart5, color: Colors.red),
-                    )
+                    Positioned(top: 0, right: 0, child: FavouriteIcon(productId: product.id))
                   ],
                 ),
               ),
