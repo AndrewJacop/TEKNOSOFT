@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../constants/colors.dart';
 import '../../constants/sizes.dart';
 
@@ -8,17 +9,16 @@ class UtCheckboxTheme {
 
   /// Customizable Light Text Theme
   static CheckboxThemeData lightCheckboxTheme = CheckboxThemeData(
-    shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(UtSizes.xs)),
-    checkColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(UtSizes.xs)),
+    checkColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return UtColors.white;
       } else {
         return UtColors.black;
       }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return UtColors.primary;
       } else {
         return Colors.transparent;
@@ -28,17 +28,16 @@ class UtCheckboxTheme {
 
   /// Customizable Dark Text Theme
   static CheckboxThemeData darkCheckboxTheme = CheckboxThemeData(
-    shape:
-        RoundedRectangleBorder(borderRadius: BorderRadius.circular(UtSizes.xs)),
-    checkColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(UtSizes.xs)),
+    checkColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return UtColors.white;
       } else {
         return UtColors.black;
       }
     }),
-    fillColor: MaterialStateProperty.resolveWith((states) {
-      if (states.contains(MaterialState.selected)) {
+    fillColor: WidgetStateProperty.resolveWith((states) {
+      if (states.contains(WidgetState.selected)) {
         return UtColors.primary;
       } else {
         return Colors.transparent;
