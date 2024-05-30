@@ -16,12 +16,13 @@ import 'package:get/get.dart';
 class OrderController extends GetxController {
   static OrderController get instance => Get.find();
 
-  //Variables
+  /// Variables
   final cartController = CartController.instance;
   final addressController = AddressController.instance;
   final checkoutController = CheckoutController.instance;
   final orderRepository = Get.put(OrderRepository());
 
+  /// Fetch User's Order History
   Future<List<OrderModel>> fetchUserOrders() async {
     try {
       final userOrders = await orderRepository.fetchUserOrders();
@@ -32,13 +33,17 @@ class OrderController extends GetxController {
     }
   }
 
+  /// Method for order processing
   void processOrder(double totalAmount) async {
     try {
+      // Start Loader
       UtFullScreenLoader.openLoadingDialog("Processing your order", UtImages.pencilAnimation);
 
+      // Get user authentication id
       final userId = AuthenticationRepository.instance.authUser!.uid;
       if (userId.isEmpty) return;
 
+      // Add details
       final order = OrderModel(
         id: UniqueKey().toString(),
         userId: userId,
@@ -51,10 +56,16 @@ class OrderController extends GetxController {
         items: cartController.cartItems.toList(),
       );
 
+      // Save the order to the firestore
       await orderRepository.saveOrder(order, userId);
 
+      // Update the cart status
       cartController.clearCart();
+
+      // Remove loader
       UtFullScreenLoader.stopLoading();
+
+      // Show Success Screen
       Get.off(() => SuccessScreen(
             image: UtImages.orderCompletedAnimation,
             title: "Payment Success!",
@@ -62,8 +73,9 @@ class OrderController extends GetxController {
             onPressed: () => Get.offAll(() => const NavigationMenu()),
           ));
     } catch (e) {
+      // Remove loader
       UtFullScreenLoader.stopLoading();
-
+      // Show Error Message
       UtLoaders.errorSnackBar(title: "Oh Snap!", message: e.toString());
     }
   }

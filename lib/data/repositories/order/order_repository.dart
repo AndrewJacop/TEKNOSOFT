@@ -6,9 +6,12 @@ import 'package:get/get.dart';
 class OrderRepository extends GetxController {
   static OrderRepository get instance => Get.find();
 
-  //Variables
+  /// Variables
   final _db = FirebaseFirestore.instance;
 
+  /* --------------------- Functins --------------------- */
+
+  /// Get all orders related to current user
   Future<List<OrderModel>> fetchUserOrders() async {
     try {
       final userId = AuthenticationRepository.instance.authUser!.uid;
@@ -23,6 +26,7 @@ class OrderRepository extends GetxController {
     }
   }
 
+  /// Store new user order
   Future<void> saveOrder(OrderModel order, String userId) async {
     try {
       await _db.collection("Users").doc(userId).collection("Orders").add(order.toJson());

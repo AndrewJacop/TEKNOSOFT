@@ -14,6 +14,7 @@ class CartItems extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = CartController.instance;
+
     return Obx(() {
       return ListView.separated(
         shrinkWrap: true,
@@ -35,6 +36,7 @@ class CartItems extends StatelessWidget {
                   children: [
                     Row(
                       children: [
+                        // Extra space
                         const SizedBox(width: 70),
 
                         // Add, Remove Buttons
